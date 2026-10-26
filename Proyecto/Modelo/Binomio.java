@@ -1,4 +1,4 @@
-package Proyecto.Modelo;
+package Modelo;
 import java.util.ArrayList;
 
 
@@ -15,6 +15,7 @@ public class Binomio
     private int cantidadMisiones;
     private Guia guia;
     private Perro perro;
+    private Equipo equipo;
     private ArrayList <Mision> misiones;
     
     public Binomio(){
@@ -25,7 +26,7 @@ public class Binomio
     public Binomio(boolean estado , int cantidadMisiones, Guia guia , Perro perro ){
         this.estado=estado;
         this.cantidadMisiones=cantidadMisiones;
-        this:guia=guia;
+        this.guia=guia;
         this.perro=perro;
         this.misiones=new ArrayList<>();
     }
@@ -72,6 +73,16 @@ public class Binomio
         this.perro = perro;
     }//end method setPerro
 
+    /**GET Method Propertie equipo*/
+    public Equipo getEquipo(){
+        return this.equipo;
+    }//end method getEquipo
+
+    /**SET Method Propertie equipo*/
+    public void setEquipo(Equipo equipo){
+        this.equipo = equipo;
+    }//end method setEquipo
+
     /**GET Method Propertie misiones*/
     public java.util.ArrayList<Modelo.Mision> getMisiones(){
         return this.misiones;
@@ -93,7 +104,8 @@ public class Binomio
         return "Estado: " + estado +
                "Cantidad Misiones: " + cantidadMisiones+
                "Guia: " + guia+
-               "Perro :"+ perro;
+               "Perro :"+ (perro != null ? perro.getNombre() : "ninguno")+
+               "Equipo: "+ (equipo != null ? equipo.getNombre() : "ninguno");
                
     }
 

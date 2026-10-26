@@ -1,4 +1,4 @@
-package Proyecto.Modelo;
+package Modelo;
 
 
 /**

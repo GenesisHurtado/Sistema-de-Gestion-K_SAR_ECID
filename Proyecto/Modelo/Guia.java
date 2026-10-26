@@ -1,4 +1,4 @@
-package Proyecto.Modelo;
+package Modelo;
 
 
 /**
@@ -12,6 +12,7 @@ public class Guia
     private String cedula ;
     private String nombreCompleto;
     private Certificacion certificacion;
+    private Binomio binomio;
     
     public Guia(){
         
@@ -57,6 +58,16 @@ public class Guia
         this.certificacion = certificacion;
     }//end method setCertificacion
 
+    /**GET Method Propertie binomio*/
+    public Binomio getBinomio(){
+        return this.binomio;
+    }//end method getBinomio
+
+    /**SET Method Propertie binomio*/
+    public void setBinomio(Binomio binomio){
+        this.binomio = binomio;
+    }//end method setBinomio
+
 //End GetterSetterExtension Source Code
     // Metodos Operacionales
     
@@ -66,7 +77,8 @@ public class Guia
     public String toString() {
         return "Cedula: " + cedula+
                "Nombre Completo : " + nombreCompleto +
-               "Certificación :"+ certificacion;
+               "Certificación :"+ certificacion+
+               "Binomio: "+ (binomio != null ? "asignado" : "ninguno");
                
     }
 

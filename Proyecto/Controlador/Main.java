@@ -1,4 +1,4 @@
-package Proyecto.Controlador;
+package Controlador;
 
 import Vista.JFKsar;
 

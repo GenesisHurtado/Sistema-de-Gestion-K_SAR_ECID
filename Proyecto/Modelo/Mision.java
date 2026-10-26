@@ -1,4 +1,4 @@
-package Proyecto.Modelo;
+package Modelo;
 
 
 /**
@@ -14,6 +14,7 @@ public class Mision
     private int sobrevivientes;
     private int fallecidos;
     private Fecha fecha;
+    private Evento evento;
     
     
     
@@ -86,6 +87,16 @@ public class Mision
         this.fecha = fecha;
     }//end method setFecha
 
+    /**GET Method Propertie evento*/
+    public Evento getEvento(){
+        return this.evento;
+    }//end method getEvento
+
+    /**SET Method Propertie evento*/
+    public void setEvento(Evento evento){
+        this.evento = evento;
+    }//end method setEvento
+
     
 //End GetterSetterExtension Source Code
     // Metodos Operacionales
@@ -98,7 +109,8 @@ public class Mision
                "Horas de Labor: " + horasLabor +
                "Sobrevivientes  : "+ sobrevivientes+
                "Fallecidos : " + fallecidos+
-               "Fecha "+ fecha;
+               "Fecha "+ fecha+
+               "Evento: "+ (evento != null ? evento.getDescripcion() : "ninguno");
               
                
     }
