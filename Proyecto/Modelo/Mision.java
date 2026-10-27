@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -28,7 +28,6 @@ public class Mision
      this.sobrevivientes=sobrevivientes;
      this.fecha=fecha;
     
-     
      
     }
     
@@ -105,14 +104,15 @@ public class Mision
     
     @Override
     public String toString() {
-        return "Código: " + codigo+
-               "Horas de Labor: " + horasLabor +
-               "Sobrevivientes  : "+ sobrevivientes+
-               "Fallecidos : " + fallecidos+
-               "Fecha "+ fecha+
+        return "Código: " + codigo+ "\n" +
+               "Horas de Labor: " + horasLabor + "\n" +
+               "Sobrevivientes  : "+ sobrevivientes+ "\n" +
+               "Fallecidos : " + fallecidos+ "\n" +
+               "Fecha "+ fecha+ "\n" +
                "Evento: "+ (evento != null ? evento.getDescripcion() : "ninguno");
               
                
     }
+
 
 }//End class

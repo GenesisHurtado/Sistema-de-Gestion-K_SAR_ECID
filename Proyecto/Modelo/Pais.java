@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 import java.util.ArrayList;
 
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Pais
 {
+    
     private String nombre;
     private String codigo;
     private ArrayList <Municipio> municipios;
@@ -26,6 +27,8 @@ public class Pais
         this.municipios=new ArrayList<>();
     }
     
+
+
 
 //Start GetterSetterExtension Source Code
 
@@ -50,27 +53,27 @@ public class Pais
     }//end method setCodigo
 
     /**GET Method Propertie municipios*/
-    public java.util.ArrayList<Modelo.Municipio> getMunicipios(){
+    public java.util.ArrayList<Proyecto.Modelo.Municipio> getMunicipios(){
         return this.municipios;
     }//end method getMunicipios
 
     /**SET Method Propertie municipios*/
-    public void setMunicipios(java.util.ArrayList<Modelo.Municipio> municipios){
+    public void setMunicipios(java.util.ArrayList<Proyecto.Modelo.Municipio> municipios){
         this.municipios = municipios;
     }//end method setMunicipios
 
-    
 //End GetterSetterExtension Source Code
 
-
+     
     // Metodos Operacionales
     
     // hacer metodo mostrar informacion
     
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-               "Código: " + codigo;
-    }
+    return "Nombre: " + nombre + "\n" +
+           "Código: " + codigo + "\n" +
+           "Municipios: " + municipios;
+   }
 
 }//End class

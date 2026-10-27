@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 import java.util.ArrayList;
 
 
@@ -37,23 +37,26 @@ public class Municipio
     }//end method setNombre
 
     /**GET Method Propertie lugares*/
-    public java.util.ArrayList<Modelo.Lugar> getLugares(){
+    public java.util.ArrayList<Proyecto.Modelo.Lugar> getLugares(){
         return this.lugares;
     }//end method getLugares
 
     /**SET Method Propertie lugares*/
-    public void setLugares(java.util.ArrayList<Modelo.Lugar> lugares){
+    public void setLugares(java.util.ArrayList<Proyecto.Modelo.Lugar> lugares){
         this.lugares = lugares;
     }//end method setLugares
-
+    
+    
+    
 //End GetterSetterExtension Source Code
+
 
     // Metodos Operacionales
     
     // Obtener Descripcion
- @Override
+    @Override
     public String toString() {
-        return "Municipio: " + nombre ;
-    }
-
+    return "Municipio: " + nombre + "\n" +
+           "Lugares: " + lugares;
+   }
 }//End class

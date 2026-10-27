@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -9,7 +9,7 @@ package Modelo;
  */
 public class Terremoto extends Evento
 {
-    private double magnitud;
+     private double magnitud;
     private String epicentro;
     
     public Terremoto (){
@@ -52,7 +52,7 @@ public class Terremoto extends Evento
 public String toString() {
     
     return super.toString() + 
-           ", Magnitud: " + this.magnitud + 
+           ", Magnitud: " + this.magnitud + "\n" +
            ", Epicentro: " + this.epicentro;
 }
 

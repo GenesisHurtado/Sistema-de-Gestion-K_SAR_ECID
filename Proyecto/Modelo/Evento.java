@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -9,7 +9,7 @@ package Modelo;
  */
 public class Evento
 {
-    protected String descripcion ;
+     protected String descripcion ;
     protected Fecha fecha;
     protected Mision mision;
     
@@ -63,8 +63,8 @@ public class Evento
     
     @Override
     public String toString() {
-        return "Descripción: " + descripcion +
-               "Fecha: " + fecha+
+        return "Descripción: " + descripcion + "\n" +
+               "Fecha: " + fecha+ "\n" +
                "Misión" + mision;
     }
 

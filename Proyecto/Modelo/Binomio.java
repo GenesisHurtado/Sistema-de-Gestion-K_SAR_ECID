@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 import java.util.ArrayList;
 
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Binomio
 {
-    
+   
     private boolean estado;
     private int cantidadMisiones;
     private Guia guia;
@@ -30,6 +30,7 @@ public class Binomio
         this.perro=perro;
         this.misiones=new ArrayList<>();
     }
+
 
 //Start GetterSetterExtension Source Code
 
@@ -84,29 +85,29 @@ public class Binomio
     }//end method setEquipo
 
     /**GET Method Propertie misiones*/
-    public java.util.ArrayList<Modelo.Mision> getMisiones(){
+    public java.util.ArrayList<Proyecto.Modelo.Mision> getMisiones(){
         return this.misiones;
     }//end method getMisiones
 
     /**SET Method Propertie misiones*/
-    public void setMisiones(java.util.ArrayList<Modelo.Mision> misiones){
+    public void setMisiones(java.util.ArrayList<Proyecto.Modelo.Mision> misiones){
         this.misiones = misiones;
     }//end method setMisiones
 
 //End GetterSetterExtension Source Code
+
      
     // Metodos Operacionales
     
     // hacer metodos verificacion certificacion , actualizar estado, , incrementar misiones
-    
-    @Override
-    public String toString() {
-        return "Estado: " + estado +
-               "Cantidad Misiones: " + cantidadMisiones+
-               "Guia: " + guia+
-               "Perro :"+ (perro != null ? perro.getNombre() : "ninguno")+
-               "Equipo: "+ (equipo != null ? equipo.getNombre() : "ninguno");
-               
-    }
+     @Override
+     public String toString() {
+    return "Estado: " + (estado ? "Activo" : "Inactivo") + "\n" +
+           "Cantidad Misiones: " + cantidadMisiones + "\n" +
+           "Guia: " + (guia != null ? guia.getNombreCompleto() : "Ninguno") + "\n" +
+           "Perro: " + (perro != null ? perro.getNombre() : "Ninguno") + "\n" +
+           "Equipo: " + (equipo != null ? equipo.getNombre() : "Ninguno");
+   }
+
 
 }//End class

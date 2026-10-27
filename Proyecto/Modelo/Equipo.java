@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 import java.util.ArrayList;
 
 
@@ -10,11 +10,23 @@ import java.util.ArrayList;
  */
 public class Equipo
 {
-    
+     
     private String nombre;
     private Fecha fechaCreacion;
     private ArrayList <Binomio> binomios;
     private ArrayList <Mision> misiones ;
+
+   public Equipo(){
+       
+   }
+   
+   public Equipo(String nombre, Fecha fechaCreacion){
+    this.nombre = nombre;
+    this.fechaCreacion = fechaCreacion;
+    this.binomios = new ArrayList<>();
+    this.misiones = new ArrayList<>();
+
+   }
 
 //Start GetterSetterExtension Source Code
 
@@ -39,31 +51,34 @@ public class Equipo
     }//end method setFechaCreacion
 
     /**GET Method Propertie binomios*/
-    public java.util.ArrayList<Modelo.Binomio> getBinomios(){
+    public java.util.ArrayList<Proyecto.Modelo.Binomio> getBinomios(){
         return this.binomios;
     }//end method getBinomios
 
     /**SET Method Propertie binomios*/
-    public void setBinomios(java.util.ArrayList<Modelo.Binomio> binomios){
+    public void setBinomios(java.util.ArrayList<Proyecto.Modelo.Binomio> binomios){
         this.binomios = binomios;
     }//end method setBinomios
 
     /**GET Method Propertie misiones*/
-    public java.util.ArrayList<Modelo.Mision> getMisiones(){
+    public java.util.ArrayList<Proyecto.Modelo.Mision> getMisiones(){
         return this.misiones;
     }//end method getMisiones
 
     /**SET Method Propertie misiones*/
-    public void setMisiones(java.util.ArrayList<Modelo.Mision> misiones){
+    public void setMisiones(java.util.ArrayList<Proyecto.Modelo.Mision> misiones){
         this.misiones = misiones;
     }//end method setMisiones
 
 //End GetterSetterExtension Source Code
 
+
     @Override
-    public String toString() {
-        return "Nombre : " + nombre +
-               "Fecha Creación: " + fechaCreacion;
-    }
+     public String toString() {
+    return "Nombre: " + nombre + "\n" +
+           "Fecha Creación: " + fechaCreacion + "\n" +
+           "Binomios: " + binomios + "\n" +
+           "Misiones: " + misiones;
+  }
 
 }//End class

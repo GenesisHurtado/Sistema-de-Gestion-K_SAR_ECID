@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 import java.util.ArrayList;
 
 
@@ -16,6 +16,10 @@ public class Lugar
   private String numero;
   private ArrayList <Evento> eventos;
 
+ public Lugar (){
+     
+ }
+ 
  
  public Lugar(String nombre, String calle, String avenida, String numero){
      this.nombre=nombre;
@@ -24,6 +28,9 @@ public class Lugar
      this.numero=numero;
      this.eventos=new ArrayList<>();
  }
+
+
+
 
 //Start GetterSetterExtension Source Code
 
@@ -68,26 +75,27 @@ public class Lugar
     }//end method setNumero
 
     /**GET Method Propertie eventos*/
-    public java.util.ArrayList<Modelo.Evento> getEventos(){
+    public java.util.ArrayList<Proyecto.Modelo.Evento> getEventos(){
         return this.eventos;
     }//end method getEventos
 
     /**SET Method Propertie eventos*/
-    public void setEventos(java.util.ArrayList<Modelo.Evento> eventos){
+    public void setEventos(java.util.ArrayList<Proyecto.Modelo.Evento> eventos){
         this.eventos = eventos;
     }//end method setEventos
 
 //End GetterSetterExtension Source Code
-
+    
  // Metodos Operacionales
     
     // hacer metodo mostrar informacion
     
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-               "Calle: " + calle+
-               "Avenida" + avenida+
+        return "Nombre: " + nombre + "\n" +
+               "Calle: " + calle+ "\n" +
+               "Avenida" + avenida+ "\n" +
                "Numero "+ numero ;
     }
+
 }//End class

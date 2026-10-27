@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -10,7 +10,7 @@ package Modelo;
 public class Deslave extends Evento
 {
     
-    private int volumenDesplazado;
+     private int volumenDesplazado;
     private String zonaAfectada;
     
     
@@ -55,7 +55,7 @@ public class Deslave extends Evento
 public String toString() {
     
     return super.toString() + 
-           "Volumen Desplazado : " + this.volumenDesplazado + 
+           "Volumen Desplazado : " + this.volumenDesplazado + "\n" +
            " Zona Afectada: " + this.zonaAfectada;
 }
 }//End class

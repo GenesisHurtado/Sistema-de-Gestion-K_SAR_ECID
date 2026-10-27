@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -113,12 +113,12 @@ public class Perro
     
     @Override
     public String toString() {
-        return "Código: " + codigo+
-               "Nombre: " + nombre +
-               "Descripción : "+ descripcion+
-               "Raza : " + raza+
-               "Edad: "+ edad+
-               "Certificación :"+ certificacion+
+        return "Código: " + codigo + "\n" +
+               "Nombre: " + nombre + "\n" +
+               "Descripción : "+ descripcion+ "\n" +
+               "Raza : " + raza+ "\n" +
+               "Edad: "+ edad+ "\n" +
+               "Certificación :"+ certificacion+ "\n" +
                "Binomio: "+ (binomio != null ? "asignado" : "ninguno");
                
     }

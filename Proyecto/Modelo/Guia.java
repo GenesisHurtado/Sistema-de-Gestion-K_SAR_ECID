@@ -1,4 +1,4 @@
-package Modelo;
+package Proyecto.Modelo;
 
 
 /**
@@ -72,14 +72,14 @@ public class Guia
     // Metodos Operacionales
     
     // hacer metodo estadoCertificado
-    
+     
     @Override
     public String toString() {
-        return "Cedula: " + cedula+
-               "Nombre Completo : " + nombreCompleto +
-               "Certificación :"+ certificacion+
-               "Binomio: "+ (binomio != null ? "asignado" : "ninguno");
-               
-    }
+    return "Cédula: " + cedula + "\n" +
+           "Nombre Completo: " + nombreCompleto + "\n" +
+           "Certificación: " + certificacion + "\n" +
+           "Binomio: " + (binomio != null ? "Asignado" : "Ninguno");
+   }
+
 
 }//End class
