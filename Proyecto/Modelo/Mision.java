@@ -11,21 +11,23 @@ public class Mision
     private int sobrevivientes;
     private int fallecidos;
     private Fecha fecha;
+    private Equipo equipo;
+    private Binomio binomio;
     private Evento evento;
-    
-    
     
     public Mision(){
         
     }
     
-     public Mision(String codigo, double horasLabor , int sobrevivientes , int fallecidos, Fecha fecha ){
+    public Mision(String codigo, Fecha fecha, Equipo equipo, Binomio binomio, Evento evento, double horasLabor, int sobrevivientes, int fallecidos){
      this.codigo=codigo;
+     this.fecha=fecha;
+     this.equipo=equipo;
+     this.binomio=binomio;
+     this.evento=evento;
      this.horasLabor=horasLabor;
      this.sobrevivientes=sobrevivientes;
-     this.fecha=fecha;
-    
-     
+     this.fallecidos=fallecidos;
     }
     
     
@@ -33,7 +35,7 @@ public class Mision
 
 //Start GetterSetterExtension Source Code
 
-    /**GET Method Propertie codigo*/
+     /**GET Method Propertie codigo*/
     public String getCodigo(){
         return this.codigo;
     }//end method getCodigo
@@ -83,6 +85,26 @@ public class Mision
         this.fecha = fecha;
     }//end method setFecha
 
+    /**GET Method Propertie equipo*/
+    public Equipo getEquipo(){
+        return this.equipo;
+    }//end method getEquipo
+
+    /**SET Method Propertie equipo*/
+    public void setEquipo(Equipo equipo){
+        this.equipo = equipo;
+    }//end method setEquipo
+
+    /**GET Method Propertie binomio*/
+    public Binomio getBinomio(){
+        return this.binomio;
+    }//end method getBinomio
+
+    /**SET Method Propertie binomio*/
+    public void setBinomio(Binomio binomio){
+        this.binomio = binomio;
+    }//end method setBinomio
+
     /**GET Method Propertie evento*/
     public Evento getEvento(){
         return this.evento;
@@ -93,32 +115,58 @@ public class Mision
         this.evento = evento;
     }//end method setEvento
 
+
     
 //End GetterSetterExtension Source Code
-    // Metodos Operacionales (Andrés)
+    // METODOS OPERACIONALES (Andrés)
 
-    /** RF6 - Desempeño puntual. Entero truncado. */
-    public int calcularDesempeno() {
-        int base = (sobrevivientes * 10) + (int) horasLabor;
-        int extra = 0;
-        if (evento instanceof Terremoto) {
-            extra = (int) (((Terremoto) evento).getMagnitud() * 5);
-        } else if (evento instanceof Deslave) {
-            extra = ((Deslave) evento).getVolumenDesplazado() / 100;
+    
+    public int calcularDesempeno(){
+        double total = 10.0 * sobrevivientes + horasLabor;
+        if(evento != null){
+            total += evento.calcularAporte();
         }
-        return base + extra;
+        return (int) Math.floor(total + 0.000001);
     }
+    
+    public boolean esDeMunicipio(String nombreMunicipio){
+        Municipio m = obtenerMunicipio();
+        return m != null && m.getNombre().equalsIgnoreCase(nombreMunicipio);
+    }
+    
+    public boolean esDeEquipo(String nombreEquipo){
+        return equipo != null && equipo.getNombre().equalsIgnoreCase(nombreEquipo);
+    }
+    
+    public Municipio obtenerMunicipio(){
+        if(evento == null || evento.getLugar() == null){
+            return null;
+        }
+        return evento.getLugar().getMunicipio();
+    }
+
+    public boolean validarFecha(){
+    if(fecha == null || !fecha.esValida()){
+        return false;
+    }
+
+    return true;
+   }
+    
+    public boolean validarDatos(){
+    return horasLabor >= 0 && sobrevivientes >= 0 && fallecidos >= 0;
+   }
     
     @Override
     public String toString() {
         return "Código: " + codigo+ "\n" +
+               "Equipo: " + (equipo != null ? equipo.getNombre() : "ninguno") + "\n" +
+               "Binomio: " + (binomio != null ? binomio.resumen() : "ninguno") + "\n" +
                "Horas de Labor: " + horasLabor + "\n" +
-               "Sobrevivientes  : "+ sobrevivientes+ "\n" +
-               "Fallecidos : " + fallecidos+ "\n" +
-               "Fecha "+ fecha+ "\n" +
+               "Sobrevivientes: "+ sobrevivientes+ "\n" +
+               "Fallecidos: " + fallecidos+ "\n" +
+               "Fecha: "+ fecha+ "\n" +
                "Evento: "+ (evento != null ? evento.getDescripcion() : "ninguno");
-              
-               
     }
 
 

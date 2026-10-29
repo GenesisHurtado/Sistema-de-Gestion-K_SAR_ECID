@@ -66,20 +66,44 @@ public class Guia
     }//end method setBinomio
 
 //End GetterSetterExtension Source Code
-    // Metodos Operacionales (Andrés)
+    // METODOS OPERACIONALES  (Andrés)
 
-    /** RF4 - true si la certificación está vigente. */
+   
     public boolean estaVigente() {
         return certificacion == Certificacion.VIGENTE;
     }
+    
+    public boolean tienePerro(){
+        return binomio != null;
+    }
+    
+    public static boolean esCedulaValida(String cedula){
+        if(cedula == null || cedula.isEmpty()){
+            return false;
+        }
+        for(int i = 0; i < cedula.length(); i++){
+            if(!Character.isDigit(cedula.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+     public void cambiarCertificacion(Certificacion nueva){
+        this.certificacion = nueva;
+        if(binomio != null){
+            binomio.actualizarEstado();
+        }
+    }
+    
+    
      
-    @Override
+   @Override
     public String toString() {
     return "Cédula: " + cedula + "\n" +
            "Nombre Completo: " + nombreCompleto + "\n" +
            "Certificación: " + certificacion + "\n" +
            "Binomio: " + (binomio != null ? "Asignado" : "Ninguno");
    }
-
 
 }//End class

@@ -31,9 +31,50 @@ public class SistemaKsar
         this.consecutivoPerro = 0;
         this.consecutivoMision = 0;
     }
-
-    // ==================== AUXILIARES (Andrés) ====================
-
+    
+    
+    // GETTERS PARA LA VISTA 
+       public ArrayList<Equipo> getEquipos(){
+        return equipos;
+    }
+    
+    public ArrayList<Guia> getGuias(){
+        return guias;
+    }
+    
+    public ArrayList<Perro> getPerros(){
+        return perros;
+    }
+    
+    public ArrayList<Binomio> getBinomios(){
+        return binomios;
+    }
+    
+    public ArrayList<Evento> getEventos(){
+        return eventos;
+    }
+    
+    public ArrayList<Mision> getMisiones(){
+        return misiones;
+    }
+    
+    public ArrayList<Pais> getPaises(){
+        return paises;
+    }
+    
+    // MUNICIPIOS REGISTRADOS DE LOS PAISES
+    public ArrayList<Municipio> getMunicipios(){
+        ArrayList<Municipio> todos = new ArrayList<>();
+        for(Pais p : paises){
+            todos.addAll(p.getMunicipios());
+        }
+        return todos;
+    }
+    
+ 
+    // METODOS AUXILIARES
+    
+    // BUSQUEDAS
     public Guia buscarGuia(String cedula) {
         for (Guia g : guias) {
             if (g.getCedula().equals(cedula)) return g;
@@ -54,15 +95,68 @@ public class SistemaKsar
         }
         return null;
     }
-
+    
+     public Mision buscarMision(String codigo){
+        for(Mision m:misiones){
+            if(m.getCodigo().equalsIgnoreCase(codigo)){
+                return m;
+            }
+        }
+        return null;
+    }
+    
+    public Pais buscarPais(String codigo){
+        for(Pais p:paises){
+            if(p.getCodigo().equalsIgnoreCase(codigo)){
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    public Pais buscarPaisPorNombre(String nombre){
+        for(Pais p:paises){
+            if(p.getNombre().equalsIgnoreCase(nombre)){
+                return p;
+            }
+        }
+        return null;
+    }
+    
+     public Lugar buscarLugar(String codigoPais, String nombreMunicipio, String nombreLugar){
+        Pais pais = buscarPais(codigoPais);
+        if(pais == null){
+            return null;
+        }
+        Municipio municipio = pais.buscarMunicipio(nombreMunicipio);
+        if(municipio == null){
+            return null;
+        }
+        return municipio.buscarLugar(nombreLugar);
+    }
+    
+    // CONSECUTIVOS
     private String generarCodigoPerro() {
         consecutivoPerro++;
         return String.format("CAN-%03d", consecutivoPerro);
     }
+    
+    public String siguienteCodigoPerro(){
+        return String.format("CAN-%03d", consecutivoPerro + 1);
+    }
+    
+    private String generarCodigoMision(){
+        consecutivoMision++;
+        return String.format("DES-%03d", consecutivoMision);
+    }
+    
+     public String siguienteCodigoMision(){
+        return String.format("DES-%03d", consecutivoMision + 1);
+    }
 
     // ==================== REGISTROS RF1 (Andrés) ====================
 
-    /** RF1 - Registrar guía. Devuelve mensaje de resultado. */
+    // REGISTRO GUIA 
     public String registrarGuia(String cedula, String nombre, Certificacion cert) {
         if (cedula == null || !cedula.matches("\\d+")) {
             return "La cédula debe tener solo números.";
@@ -77,7 +171,7 @@ public class SistemaKsar
         return "Guía registrado correctamente.";
     }
 
-    /** RF1 - Registrar perro. Código automático CAN-###. */
+    // REGISTRO PERRO
     public String registrarPerro(String nombre, String descripcion, String raza, int edad, Certificacion cert) {
         if (nombre == null || nombre.trim().isEmpty() || raza == null || raza.trim().isEmpty()) {
             return "Nombre y raza son obligatorios.";
@@ -90,16 +184,30 @@ public class SistemaKsar
         return "Perro registrado. Código: " + codigo;
     }
 
-    /** RF1 - Armar binomio. Solo guía y perro sin binomio. */
+    // ARMA BINOMIO
     public String armarBinomio(String cedulaGuia, String codigoPerro, String nombreEquipo) {
         Guia guia = buscarGuia(cedulaGuia);
         Perro perro = buscarPerro(codigoPerro);
         Equipo equipo = buscarEquipo(nombreEquipo);
-        if (guia == null) return "El guía no existe.";
-        if (perro == null) return "El perro no existe.";
-        if (equipo == null) return "El equipo no existe.";
-        if (guia.getBinomio() != null) return "Ese guía ya tiene binomio.";
-        if (perro.getBinomio() != null) return "Ese perro ya tiene binomio.";
+        if (guia == null){
+          return "El guía no existe.";  
+        }
+        
+        if (perro == null){
+         return "El perro no existe.";
+        }
+        
+        if (equipo == null) {
+          return "El equipo no existe.";   
+        }
+        
+        if (guia.getBinomio() != null) {
+          return "Ese guía ya tiene binomio.";   
+        }
+        
+        if (perro.getBinomio() != null) {
+          return "Ese perro ya tiene binomio.";
+        }
 
         boolean disponible = guia.estaVigente() && perro.estaVigente();
         Binomio b = new Binomio(disponible, 0, guia, perro);
@@ -111,10 +219,210 @@ public class SistemaKsar
         binomios.add(b);
         return disponible ? "Binomio armado y disponible." : "Binomio armado (certificación no vigente).";
     }
+    
+    // REGISTRO UBICACION DE EVENTO 
+    
+     public String registrarUbicacion(String nombrePais, String codigoPais, String nombreMunicipio,
+                                     String nombreLugar, String calle, String numero, String barrio) {
+        if (esVacio(nombrePais) || esVacio(codigoPais) || esVacio(nombreMunicipio) || esVacio(nombreLugar)) {
+            return "País, código, municipio y lugar son obligatorios.";
+        }
+        String codigo = codigoPais.trim().toUpperCase();
+        Pais pais = buscarPais(codigo);
+        if (pais == null) {
+            if (buscarPaisPorNombre(nombrePais.trim()) != null) {
+                return "Ya existe un país con ese nombre y con otro código.";
+            }
+            pais = new Pais(nombrePais.trim(), codigo);
+            paises.add(pais);
+        } else if (!pais.getNombre().equalsIgnoreCase(nombrePais.trim())) {
+            return "El código " + codigo + " ya pertenece a " + pais.getNombre() + ".";
+        }
+        
+          Municipio municipio = pais.buscarMunicipio(nombreMunicipio.trim());
+        if (municipio == null) {
+            municipio = new Municipio(nombreMunicipio.trim(), pais);
+            pais.agregarMunicipio(municipio);
+        }
 
+        if (municipio.buscarLugar(nombreLugar.trim()) != null) {
+            return "La ubicación ya estaba registrada.";
+        }
+        Lugar lugar = new Lugar(nombreLugar.trim(), calle == null ? "" : calle.trim(), "",
+                                numero == null ? "" : numero.trim(), barrio == null ? "" : barrio.trim(), municipio);
+        municipio.agregarLugar(lugar);
+        return "Ubicación registrada correctamente.";
+    }
+
+    private boolean esVacio(String texto) {
+        return texto == null || texto.trim().isEmpty();
+    }
+
+        
+    // REGISTRO EQUIPO
+    
+     public String registrarEquipo(String nombre, Fecha fechaCreacion) {
+        if (esVacio(nombre)) {
+            return "El nombre del equipo es obligatorio.";
+        }
+        if (buscarEquipo(nombre.trim()) != null) {
+            return "Ya existe un equipo con ese nombre.";
+        }
+        if (fechaCreacion == null || !fechaCreacion.esValida()) {
+            return "La fecha de creación no es válida.";
+        }
+        equipos.add(new Equipo(nombre.trim(), fechaCreacion));
+        return "Equipo registrado correctamente.";
+    }
+    
+    
+    // REGISTRO EVENTO (TERREMOTO)
+    public String registrarTerremoto(Fecha fecha, double magnitud, String epicentro, Lugar lugar) {
+        if (lugar == null) {
+            return "Debe indicar la ubicación del evento.";
+        }
+        if (magnitud < 0 || Math.abs(magnitud * 10 - Math.round(magnitud * 10)) > 1e-9) {
+            return "La magnitud debe ser mayor o igual a 0 y con un decimal.";
+        }
+        Terremoto t = new Terremoto("Terremoto", fecha, lugar, magnitud, epicentro == null ? "" : epicentro.trim());
+        if (!t.validarFecha()) {
+            return "La fecha del evento no es válida o es posterior a la fecha actual.";
+        }
+        eventos.add(t);
+        lugar.agregarEvento(t);
+        return "Terremoto registrado correctamente.";
+    }
+    
+    
+    // REGISTRO EVENTO (DESLAVE)
+    public String registrarDeslave(Fecha fecha, int volumenDesplazado, String zonaAfectada, Lugar lugar) {
+        if (lugar == null) {
+            return "Debe indicar la ubicación del evento.";
+        }
+        if (volumenDesplazado < 0) {
+            return "El volumen desplazado debe ser mayor o igual a 0.";
+        }
+        Deslave d = new Deslave("Deslave", fecha, lugar, volumenDesplazado, zonaAfectada == null ? "" : zonaAfectada.trim());
+        if (!d.validarFecha()) {
+            return "La fecha del evento no es válida o es posterior a la fecha actual.";
+        }
+        eventos.add(d);
+        lugar.agregarEvento(d);
+        return "Deslave registrado correctamente.";
+    }
+    
+     // REGISTRO MISION
+       public String registrarMision(Fecha fecha, Evento evento, Binomio binomio, double horasLabor, int sobrevivientes, int fallecidos) {
+    if (evento == null) {
+        return "Debe seleccionar un evento.";
+    }
+    if (binomio == null) {
+        return "Debe seleccionar un binomio.";
+    }
+    if (evento.tieneMision()) {
+        return "Ese evento ya tiene una misión registrada.";
+    }
+    if (!binomio.verificarCertificacion()) {
+        return "No se puede registrar la misión: el guía y el perro deben tener la certificación vigente.";
+    }
+
+    Mision m = new Mision("", fecha, binomio.getEquipo(), binomio, evento,
+                          horasLabor, sobrevivientes, fallecidos);
+
+    if (!m.validarFecha()) {
+        return "La fecha de la misión no es válida o es posterior a la fecha actual.";
+    }
+    if (!m.validarDatos()) {
+        return "Las horas, los sobrevivientes y los fallecidos deben ser mayores o iguales a 0.";
+    }
+
+    m.setCodigo(generarCodigoMision());
+    evento.setMision(m);
+    binomio.getMisiones().add(m);
+    binomio.incrementarMisiones();
+    misiones.add(m);
+    return "Misión registrada. Código: " + m.getCodigo();
+   }
+    
+    
+    // ==================== CONSULTAS RF2, RF3 (Camilo) ====================
+    
+    // LISTAR GUIAS Y PERROS CON SU CERTIFICACIÓN 
+    
+    public String listarGuiasYPerros(){
+        StringBuilder listado=new StringBuilder();
+        listado.append("------LISTADO DE GUIAS-----\n");
+        if(guias.isEmpty()){
+            listado.append("no hay guias registrados\n");
+        }else{
+            for(Guia g:guias){
+                listado.append("Cedula: ").append(g.getCedula()).append("\n Nombre: ").append(g.getNombreCompleto()).append("\n Certificacion: ").append(g.getCertificacion()).append("\n\n");
+            }
+        }
+        
+        listado.append("\n-----LISTADO DE PERROS-----\n");
+        if(perros.isEmpty()){
+            listado.append("No hay perros registrados\n");
+        }else{
+            for(Perro p:perros){
+                listado.append("Codigo: ").append(p.getCodigo()).append("\n Nombre: ").append(p.getNombre()).append("\n Certificacion: ").append(p.getCertificacion()).append("\n\n");
+            }
+        }
+        return listado.toString();
+    }
+    
+    public String listarPerrosDelGuia(String cedulaGuia){
+        Guia guia=buscarGuia(cedulaGuia);
+        if(guia==null){
+            return "No se encontro, el Guia con cedula "+cedulaGuia+" no existe";
+        }
+        StringBuilder listado=new StringBuilder();
+        listado.append("Perros asociados al guia ").append(guia.getNombreCompleto()).append(":\n");
+        boolean tienePerros=false;
+        for(Binomio b:binomios){
+            if(b.getGuia().getCedula().equals(cedulaGuia)){
+                Perro p=b.getPerro();
+                listado.append("*Codigo: ").append(p.getCodigo()).append("\nNombre: ").append(p.getNombre())
+                       .append("\nCertificacion: ").append(p.getCertificacion()).append("\n");
+                tienePerros=true;
+            }
+        }
+        if(!tienePerros){
+            return "El guia "+guia.getNombreCompleto()+" está pero no tiene perros en ningun binomio";
+        }
+        return listado.toString();
+    }
+    
+    // ==================== CONSULTAR RF3 (Camilo) ====================
+    
+    public String consultarPerro(String codigo){
+        Perro p = buscarPerro(codigo == null ? "" : codigo.trim());
+        if(p == null){
+            return "No se encontró ningún perro con el código "+codigo+".";
+        }
+        return p.toString();
+    }
+    
+    public String consultarGuia(String cedula){
+        Guia g = buscarGuia(cedula == null ? "" : cedula.trim());
+        if(g == null){
+            return "No se encontró ningún guía con la cédula "+cedula+".";
+        }
+        return g.toString();
+    }
+    
+    public String consultarMision(String codigo){
+        Mision m = buscarMision(codigo == null ? "" : codigo.trim());
+        if(m == null){
+            return "No se encontró ninguna misión con el código "+codigo+".";
+        }
+        return m.toString();
+    }
+     
+    
     // ==================== ACTUALIZACIÓN RF4 (Andrés) ====================
 
-    /** RF4 - Actualizar certificación del guía (Director). */
+    // ACTUALIZACIONES  CERFICADOS GUIA Y PERRO
     public String actualizarCertificacionGuia(String cedula, Certificacion nueva) {
         Guia g = buscarGuia(cedula);
         if (g == null) return "No se encontró el guía.";
@@ -122,7 +430,7 @@ public class SistemaKsar
         return "Certificación del guía actualizada.";
     }
 
-    /** RF4 - Actualizar certificación del perro (Médico veterinario). */
+    
     public String actualizarCertificacionPerro(String codigo, Certificacion nueva) {
         Perro p = buscarPerro(codigo);
         if (p == null) return "No se encontró el perro.";
@@ -132,7 +440,7 @@ public class SistemaKsar
 
     // ==================== FILTROS RF5 (Andrés) ====================
 
-    /** RF5 - Filtrar misiones por equipo. */
+    //FILTRAR MISIONES
     public ArrayList<Mision> filtrarPorEquipo(String nombreEquipo) {
         ArrayList<Mision> resultado = new ArrayList<>();
         Equipo eq = buscarEquipo(nombreEquipo);
@@ -144,15 +452,22 @@ public class SistemaKsar
         }
         return resultado;
     }
-
-    /** RF5 - Todas las misiones (base del historial). */
+    
+      public ArrayList<Mision> filtrarPorMunicipio(String nombreMunicipio) {
+        ArrayList<Mision> resultado = new ArrayList<>();
+        for (Mision m : misiones) {
+            Evento ev = m.getEvento();
+            if (ev != null && ev.getLugar() != null && ev.getLugar().getMunicipio() != null
+                    && ev.getLugar().getMunicipio().getNombre().equalsIgnoreCase(nombreMunicipio)) {
+                resultado.add(m);
+            }
+        }
+        return resultado;
+    }
+   
     public ArrayList<Mision> listarMisiones() {
         return misiones;
     }
 
-    // getters de listas (para llenar combos en la vista)
-    public ArrayList<Guia> getGuias() { return guias; }
-    public ArrayList<Perro> getPerros() { return perros; }
-    public ArrayList<Equipo> getEquipos() { return equipos; }
-    public ArrayList<Binomio> getBinomios() { return binomios; }
+    
 }

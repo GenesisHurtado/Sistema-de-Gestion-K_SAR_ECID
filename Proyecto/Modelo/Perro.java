@@ -105,14 +105,14 @@ public class Perro
 
 //End GetterSetterExtension Source Code
 
-  // Metodos Operacionales (Andrés)
+  // METODOS OPERACIONALES  (Andrés)
 
-    /** RF4 - true si la certificación está vigente. */
+  
     public boolean estaVigente() {
         return certificacion == Certificacion.VIGENTE;
     }
 
-    /** Valida aptitud: vigente y edad mayor a 0. */
+  
     public boolean validarAptitudFisica() {
         return estaVigente() && edad > 0;
     }

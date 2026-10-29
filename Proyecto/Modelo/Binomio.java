@@ -95,30 +95,51 @@ public class Binomio
 //End GetterSetterExtension Source Code
 
      
-    // Metodos Operacionales (Andrés)
+    // METODOS OPERACIONALES (Andrés)
 
-    /** Verifica que guía y perro estén vigentes. */
+   
     public boolean verificarCertificacion() {
         return guia != null && perro != null && guia.estaVigente() && perro.estaVigente();
     }
 
-    /** Actualiza el estado según la certificación. */
+ 
     public void actualizarEstado() {
         this.estado = verificarCertificacion();
     }
 
-    /** Incrementa el contador de misiones. */
+  
     public void incrementarMisiones() {
         this.cantidadMisiones++;
     }
+    
+    public void agregarMision(Mision m){
+        if(m != null){
+            misiones.add(m);
+            incrementarMisiones();
+        }
+    }
+    
+    public boolean estaDisponible(){
+        return verificarCertificacion();
+    }
+    
+    public String resumen(){
+        String g = (guia != null) ? guia.getNombreCompleto() : "Sin guía";
+        String p = (perro != null) ? perro.getNombre() : "Sin perro";
+        return g + " + " + p;
+    }
+    
      @Override
      public String toString() {
-    return "Estado: " + (estado ? "Activo" : "Inactivo") + "\n" +
+    return "Estado: " + (estado ? "Disponible" : "No disponible") + "\n" +
            "Cantidad Misiones: " + cantidadMisiones + "\n" +
            "Guia: " + (guia != null ? guia.getNombreCompleto() : "Ninguno") + "\n" +
            "Perro: " + (perro != null ? perro.getNombre() : "Ninguno") + "\n" +
            "Equipo: " + (equipo != null ? equipo.getNombre() : "Ninguno");
    }
+    
+    
+    
 
 
 }//End class

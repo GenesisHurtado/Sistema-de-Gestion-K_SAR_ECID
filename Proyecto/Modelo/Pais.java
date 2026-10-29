@@ -65,15 +65,35 @@ public class Pais
 //End GetterSetterExtension Source Code
 
      
-    // Metodos Operacionales
+    // METODOS OPERACIONALES 
     
-    // hacer metodo mostrar informacion
+    public Municipio buscarMunicipio(String nombreMunicipio){
+        for(Municipio m : municipios){
+            if(m.getNombre().equalsIgnoreCase(nombreMunicipio)){
+                return m;
+            }
+        }
+        return null;
+    }
+    
+    
+     public boolean agregarMunicipio(Municipio m){
+        if(m == null || buscarMunicipio(m.getNombre()) != null){
+            return false;
+        }
+        municipios.add(m);
+        return true;
+    }
+    
+    public String mostrarInformacion(){
+        return nombre + " (" + codigo + ") - " + municipios.size() + " municipio(s)";
+    }
     
     @Override
     public String toString() {
     return "Nombre: " + nombre + "\n" +
            "Código: " + codigo + "\n" +
-           "Municipios: " + municipios;
+            "Municipios: " + municipios.size();
    }
 
 }//End class

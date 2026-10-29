@@ -71,14 +71,44 @@ public class Equipo
     }//end method setMisiones
 
 //End GetterSetterExtension Source Code
+   // METODOS OPERACIONALES 
+   
+     public boolean agregarBinomio(Binomio b){
+        if(b == null || binomios.contains(b)){
+            return false;
+        }
+        binomios.add(b);
+        b.setEquipo(this);
+        return true;
+    }
+    
+    public boolean agregarMision(Mision m){
+        if(m == null || misiones.contains(m)){
+            return false;
+        }
+        misiones.add(m);
+        return true;
+    }
+    
+    public ArrayList<Binomio> listarBinomiosDisponibles(){
+        ArrayList<Binomio> disponibles = new ArrayList<>();
+        for(Binomio b : binomios){
+            if(b.estaDisponible()){
+                disponibles.add(b);
+            }
+        }
+        return disponibles;
+    }
+    
+    
+   
 
-
-    @Override
+     @Override
      public String toString() {
     return "Nombre: " + nombre + "\n" +
            "Fecha Creación: " + fechaCreacion + "\n" +
-           "Binomios: " + binomios + "\n" +
-           "Misiones: " + misiones;
+           "Binomios: " + binomios.size() + "\n" +
+           "Misiones: " + misiones.size();
   }
 
 }//End class

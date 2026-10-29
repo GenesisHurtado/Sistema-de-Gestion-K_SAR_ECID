@@ -10,7 +10,7 @@ package Proyecto.Modelo;
 public class Deslave extends Evento
 {
     
-     private int volumenDesplazado;
+    private int volumenDesplazado;
     private String zonaAfectada;
     
     
@@ -18,8 +18,8 @@ public class Deslave extends Evento
         
     }
     
-    public Deslave(String descripcion , Fecha fecha , Mision mision , int volumenDesplazado, String zonaAfectada){
-     super(descripcion,fecha,mision);
+    public Deslave(String descripcion , Fecha fecha , Lugar lugar , int volumenDesplazado, String zonaAfectada){
+     super(descripcion,fecha,lugar);
      this.volumenDesplazado=volumenDesplazado;
      this.zonaAfectada=zonaAfectada;
      
@@ -27,7 +27,7 @@ public class Deslave extends Evento
 
 //Start GetterSetterExtension Source Code
 
-    /**GET Method Propertie volumenDesplazado*/
+   /**GET Method Propertie volumenDesplazado*/
     public int getVolumenDesplazado(){
         return this.volumenDesplazado;
     }//end method getVolumenDesplazado
@@ -47,15 +47,33 @@ public class Deslave extends Evento
         this.zonaAfectada = zonaAfectada;
     }//end method setZonaAfectada
 
+
 //End GetterSetterExtension Source Code
 
-     // Metodos operacionales
-     // calcular aporte
-    @Override
-public String toString() {
+     // METODOS OPERACIONALES 
+     
+     public double calcularAporte(){
+        return this.volumenDesplazado / 100.0;
+    }
+    
+    public String getTipo(){
+        return "Deslave";
+    }
+    
+    public String getNombreDato(){
+        return "Volumen";
+    }
+    
+    public String getValorDato(){
+        return this.volumenDesplazado + " m³";
+    }
+    
+ 
+     @Override
+    public String toString() {
     
     return super.toString() + 
-           "Volumen Desplazado : " + this.volumenDesplazado + "\n" +
-           " Zona Afectada: " + this.zonaAfectada;
-}
+           "Volumen Desplazado: " + this.volumenDesplazado + " m³\n" +
+           "Zona Afectada: " + this.zonaAfectada;
+   }
 }//End class
