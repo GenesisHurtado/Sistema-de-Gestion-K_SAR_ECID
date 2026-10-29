@@ -2,10 +2,8 @@ package Proyecto.Modelo;
 
 
 /**
- * Write a description of class Perro here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Perro. Andrés agregó el atributo binomio (bidireccional),
+ * estaVigente() y validarAptitudFisica().
  */
 public class Perro
 {
@@ -107,9 +105,17 @@ public class Perro
 
 //End GetterSetterExtension Source Code
 
-  // Metodos Operacionales
-    
-    // hacer metodo validarAptitudfisica , estadoCertificado
+  // Metodos Operacionales (Andrés)
+
+    /** RF4 - true si la certificación está vigente. */
+    public boolean estaVigente() {
+        return certificacion == Certificacion.VIGENTE;
+    }
+
+    /** Valida aptitud: vigente y edad mayor a 0. */
+    public boolean validarAptitudFisica() {
+        return estaVigente() && edad > 0;
+    }
     
     @Override
     public String toString() {

@@ -3,10 +3,8 @@ import java.util.ArrayList;
 
 
 /**
- * Write a description of class Binomio here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Binomio. Andrés agregó el atributo equipo (bidireccional),
+ * verificarCertificacion(), actualizarEstado() e incrementarMisiones().
  */
 public class Binomio
 {
@@ -97,9 +95,22 @@ public class Binomio
 //End GetterSetterExtension Source Code
 
      
-    // Metodos Operacionales
-    
-    // hacer metodos verificacion certificacion , actualizar estado, , incrementar misiones
+    // Metodos Operacionales (Andrés)
+
+    /** Verifica que guía y perro estén vigentes. */
+    public boolean verificarCertificacion() {
+        return guia != null && perro != null && guia.estaVigente() && perro.estaVigente();
+    }
+
+    /** Actualiza el estado según la certificación. */
+    public void actualizarEstado() {
+        this.estado = verificarCertificacion();
+    }
+
+    /** Incrementa el contador de misiones. */
+    public void incrementarMisiones() {
+        this.cantidadMisiones++;
+    }
      @Override
      public String toString() {
     return "Estado: " + (estado ? "Activo" : "Inactivo") + "\n" +

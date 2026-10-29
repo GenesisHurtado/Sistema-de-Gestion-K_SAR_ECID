@@ -2,10 +2,7 @@ package Proyecto.Modelo;
 
 
 /**
- * Write a description of class Guia here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Guía. Andrés agregó el atributo binomio (bidireccional) y estaVigente().
  */
 public class Guia
 {
@@ -69,9 +66,12 @@ public class Guia
     }//end method setBinomio
 
 //End GetterSetterExtension Source Code
-    // Metodos Operacionales
-    
-    // hacer metodo estadoCertificado
+    // Metodos Operacionales (Andrés)
+
+    /** RF4 - true si la certificación está vigente. */
+    public boolean estaVigente() {
+        return certificacion == Certificacion.VIGENTE;
+    }
      
     @Override
     public String toString() {

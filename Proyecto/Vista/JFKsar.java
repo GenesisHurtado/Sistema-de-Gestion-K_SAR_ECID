@@ -1,10 +1,15 @@
 package Proyecto.Vista;
+import Proyecto.Modelo.SistemaKsar;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+/**
+ * Ventana principal.
+ * Andrés: recibe el controlador y abre los formularios de guía, perro, binomio e historial.
+ */
 public class JFKsar extends JFrame
 {
     // Etiquetas del oeste
@@ -33,7 +38,14 @@ public class JFKsar extends JFrame
         {"Terremoto", "5.5", "Urbanización La Rivera", "Libertador", "2026-10-05"}
     };
 
+    private SistemaKsar sistema;
+
     public JFKsar() {
+        this(new SistemaKsar());
+    }
+
+    public JFKsar(SistemaKsar sistema) {
+        this.sistema = sistema;
         setTitle("K-SAR ECID - Sistema de Gestión de Equipos Caninos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 700);
@@ -226,8 +238,14 @@ public class JFKsar extends JFrame
         // Botones para acceder a los subFormularios
         
         if (texto.equals("Registrar perro")) {
-        btn.addActionListener(e -> new JFRegistrarPerro().setVisible(true));
-       }
+            btn.addActionListener(e -> new JFRegistrarPerro(sistema).setVisible(true));
+        }
+        if (texto.equals("Registrar guía")) {
+            btn.addActionListener(e -> new JFRegistrarGuia(sistema).setVisible(true));
+        }
+        if (texto.equals("Armar binomio")) {
+            btn.addActionListener(e -> new JFArmarBinomio(sistema).setVisible(true));
+        }
 
        filaRegistro.add(btn);
     }
@@ -237,11 +255,13 @@ public class JFKsar extends JFrame
     JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
     filaConsulta.setBackground(Color.WHITE);
     String[] consultas = {"Listar guías y perros",
-                          "Binomios disponibles",
                           "Historial por fecha"};
     for (String texto : consultas) {
         JButton btn = new JButton(texto);
         btn.setFocusPainted(false);
+        if (texto.equals("Historial por fecha")) {
+            btn.addActionListener(e -> new JFHistorialMisiones(sistema).setVisible(true));
+        }
         filaConsulta.add(btn);
     }
     

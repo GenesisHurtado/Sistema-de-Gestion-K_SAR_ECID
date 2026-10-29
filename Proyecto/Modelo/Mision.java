@@ -2,10 +2,7 @@ package Proyecto.Modelo;
 
 
 /**
- * Write a description of class Mision here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Misión. Andrés agregó el atributo evento (bidireccional) y calcularDesempeno().
  */
 public class Mision
 {
@@ -98,9 +95,19 @@ public class Mision
 
     
 //End GetterSetterExtension Source Code
-    // Metodos Operacionales
-    
-    // hacer metodo calcularDesempeño esDeMunicipio
+    // Metodos Operacionales (Andrés)
+
+    /** RF6 - Desempeño puntual. Entero truncado. */
+    public int calcularDesempeno() {
+        int base = (sobrevivientes * 10) + (int) horasLabor;
+        int extra = 0;
+        if (evento instanceof Terremoto) {
+            extra = (int) (((Terremoto) evento).getMagnitud() * 5);
+        } else if (evento instanceof Deslave) {
+            extra = ((Deslave) evento).getVolumenDesplazado() / 100;
+        }
+        return base + extra;
+    }
     
     @Override
     public String toString() {
