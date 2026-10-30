@@ -1,5 +1,5 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.SistemaKsar;
+import Proyecto.Modelo.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -216,59 +216,76 @@ public class JFKsar extends JFrame
     }
 
     // ==================== SUR ====================
-    private JPanel crearSur() {
-    JPanel sur = new JPanel();
-    sur.setLayout(new BoxLayout(sur, BoxLayout.Y_AXIS));
-    sur.setBackground(Color.WHITE);
-    sur.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-
-    String[] registros = {"Registrar equipo", "Registrar guía", "Registrar perro",
-                          "Armar binomio", "Registrar evento", "Registrar misión"};
-
-    JPanel filaRegistro = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
-    filaRegistro.setBackground(Color.WHITE);
-    for (String texto : registros) {
-        JButton btn = new JButton(texto);
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        filaRegistro.add(btn);
-        
-        
-        // Botones para acceder a los subFormularios
-        
-        if (texto.equals("Registrar perro")) {
-            btn.addActionListener(e -> new JFRegistrarPerro(sistema).setVisible(true));
+     private JPanel crearSur() {
+        JPanel sur = new JPanel();
+        sur.setLayout(new BoxLayout(sur, BoxLayout.Y_AXIS));
+        sur.setBackground(Color.WHITE);
+        sur.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+ 
+        String[] registros = {"Registrar equipo", "Registrar guía", "Registrar perro",
+                              "Armar binomio", "Registrar evento", "Registrar misión"};
+ 
+        JPanel filaRegistro = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
+        filaRegistro.setBackground(Color.WHITE);
+        for (String texto : registros) {
+            JButton btn = new JButton(texto);
+            btn.setBackground(new Color(15, 32, 68));
+            btn.setForeground(Color.WHITE);
+            btn.setFocusPainted(false);
+ 
+            // Botones para acceder a los subFormularios
+ 
+            if (texto.equals("Registrar equipo")) {
+                btn.addActionListener(e -> new JFRegistrarEquipo(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Registrar guía")) {
+                btn.addActionListener(e -> new JFRegistrarGuia(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Registrar perro")) {
+                btn.addActionListener(e -> new JFRegistrarPerro(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Armar binomio")) {
+                btn.addActionListener(e -> new JFArmarBinomio(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Registrar evento")) {
+                btn.addActionListener(e -> new JFResgistrarEvento(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Registrar misión")) {
+                btn.addActionListener(e -> new JFRegistrarMision(sistema).setVisible(true));
+            }
+ 
+            filaRegistro.add(btn);
         }
-        if (texto.equals("Registrar guía")) {
-            btn.addActionListener(e -> new JFRegistrarGuia(sistema).setVisible(true));
+ 
+        JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
+        filaConsulta.setBackground(Color.WHITE);
+        String[] consultas = {"Listar guías y perros", "Historial por fecha", "Mayor desempeño"};
+        for (String texto : consultas) {
+            JButton btn = new JButton(texto);
+            btn.setFocusPainted(false);
+ 
+            if (texto.equals("Listar guías y perros")) {
+                btn.addActionListener(e -> new JFListarGuia_Perro(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Historial por fecha")) {
+                btn.addActionListener(e -> new JFHistorialMisiones(sistema).setVisible(true));
+            }
+ 
+            if (texto.equals("Mayor desempeño")) {
+                btn.addActionListener(e -> new JFMayorDesempeño(sistema).setVisible(true));
+            }
+ 
+            filaConsulta.add(btn);
         }
-        if (texto.equals("Armar binomio")) {
-            btn.addActionListener(e -> new JFArmarBinomio(sistema).setVisible(true));
-        }
-
-       filaRegistro.add(btn);
+ 
+        sur.add(filaRegistro);
+        sur.add(filaConsulta);
+        return sur;
     }
-     
-    
-    
-    JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
-    filaConsulta.setBackground(Color.WHITE);
-    String[] consultas = {"Listar guías y perros",
-                          "Historial por fecha"};
-    for (String texto : consultas) {
-        JButton btn = new JButton(texto);
-        btn.setFocusPainted(false);
-        if (texto.equals("Historial por fecha")) {
-            btn.addActionListener(e -> new JFHistorialMisiones(sistema).setVisible(true));
-        }
-        filaConsulta.add(btn);
-    }
-    
-    
-
-    sur.add(filaRegistro);
-    sur.add(filaConsulta);
-    return sur;
-}
 }

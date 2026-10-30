@@ -1,5 +1,5 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.Fecha;
+import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 

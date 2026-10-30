@@ -33,10 +33,10 @@ public class DatosPrueba
         s.registrarPerro("Max", "Pelaje corto leonado con máscara negra", "Malinois", 3, Certificacion.VENCIDA);
         
         // Binomios (Carlos Díaz y Max quedan sueltos para probar "Armar binomio")
-        s.armarBinomio("CAN-001", "12345678", "Equipo Alpha");
-        s.armarBinomio("CAN-002", "23456789", "Equipo Beta");
-        s.armarBinomio("CAN-003", "34567890", "Equipo Alpha");
-        s.armarBinomio("CAN-004", "45678901", "Equipo Gamma");
+        s.armarBinomio("12345678", "CAN-001", "Equipo Alpha");
+        s.armarBinomio("23456789", "CAN-002", "Equipo Beta");
+        s.armarBinomio("34567890", "CAN-003", "Equipo Alpha");
+        s.armarBinomio("45678901", "CAN-004", "Equipo Gamma");
         
         // Ubicaciones
         s.registrarUbicacion("Venezuela", "VE", "Libertador", "Residencias Rita", "Av. Principal", "15", "San Bernardino");
