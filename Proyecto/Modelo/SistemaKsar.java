@@ -62,6 +62,10 @@ public class SistemaKsar
         return paises;
     }
     
+    public ArrayList<Mision> listarMisiones() {
+       return misiones;
+   }
+    
     // MUNICIPIOS REGISTRADOS DE LOS PAISES
     public ArrayList<Municipio> getMunicipios(){
         ArrayList<Municipio> todos = new ArrayList<>();
@@ -438,9 +442,6 @@ public class SistemaKsar
         return "Certificación del perro actualizada.";
     }
 
-    // ==================== FILTROS RF5 (Andrés) ====================
-
-    //FILTRAR MISIONES
     public ArrayList<Mision> filtrarPorEquipo(String nombreEquipo) {
         ArrayList<Mision> resultado = new ArrayList<>();
         Equipo eq = buscarEquipo(nombreEquipo);
@@ -452,8 +453,8 @@ public class SistemaKsar
         }
         return resultado;
     }
-    
-      public ArrayList<Mision> filtrarPorMunicipio(String nombreMunicipio) {
+
+    public ArrayList<Mision> filtrarPorMunicipio(String nombreMunicipio) {
         ArrayList<Mision> resultado = new ArrayList<>();
         for (Mision m : misiones) {
             Evento ev = m.getEvento();
@@ -464,10 +465,79 @@ public class SistemaKsar
         }
         return resultado;
     }
-   
-    public ArrayList<Mision> listarMisiones() {
-        return misiones;
+
+    // // ==================== FILTRAR POR EQUIPO Y/O MUNICIPIO RF5 ====================
+    public ArrayList<Mision> filtrarMisiones(String nombreEquipo, String nombreMunicipio) {
+        ArrayList<Mision> resultado = new ArrayList<>();
+        for (Mision m : misiones) {
+            boolean okEquipo = esVacio(nombreEquipo) || m.esDeEquipo(nombreEquipo.trim());
+            boolean okMunicipio = esVacio(nombreMunicipio) || m.esDeMunicipio(nombreMunicipio.trim());
+            if (okEquipo && okMunicipio) {
+                resultado.add(m);
+            }
+        }
+        return resultado;
     }
 
+    
+    public ArrayList<String> listarNombresMunicipios() {
+        ArrayList<String> nombres = new ArrayList<>();
+        for (Municipio m : getMunicipios()) {
+            if (!nombres.contains(m.getNombre())) {
+                nombres.add(m.getNombre());
+            }
+        }
+        return nombres;
+    }
+
+    // BUSQUEDAS PARA LA VENTANA PRINCIPAL
+
+    
+    public ArrayList<Mision> buscarMisionesPorCodigo(String texto) {
+        ArrayList<Mision> resultado = new ArrayList<>();
+        String t = texto == null ? "" : texto.trim().toLowerCase();
+        for (Mision m : misiones) {
+            if (m.getCodigo().toLowerCase().contains(t)) {
+                resultado.add(m);
+            }
+        }
+        return resultado;
+    }
+
+    
+    public ArrayList<Binomio> buscarBinomiosPorPerro(String texto) {
+        ArrayList<Binomio> resultado = new ArrayList<>();
+        String t = texto == null ? "" : texto.trim().toLowerCase();
+        for (Binomio b : binomios) {
+            Perro p = b.getPerro();
+            if (p != null && (p.getCodigo().toLowerCase().contains(t)
+                    || p.getNombre().toLowerCase().contains(t))) {
+                resultado.add(b);
+            }
+        }
+        return resultado;
+    }
+
+
+    public ArrayList<Binomio> buscarBinomiosPorGuia(String texto) {
+        ArrayList<Binomio> resultado = new ArrayList<>();
+        String t = texto == null ? "" : texto.trim().toLowerCase();
+        for (Binomio b : binomios) {
+            Guia g = b.getGuia();
+            if (g != null && (g.getCedula().toLowerCase().contains(t)
+                    || g.getNombreCompleto().toLowerCase().contains(t))) {
+                resultado.add(b);
+            }
+        }
+        return resultado;
+    }
+
+    public int contarBinomiosDisponibles() {
+        int n = 0;
+        for (Binomio b : binomios) {
+            if (b.estaDisponible()) n++;
+        }
+        return n;
+    }
     
 }
