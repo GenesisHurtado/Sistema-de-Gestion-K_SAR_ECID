@@ -181,7 +181,7 @@ public class JFKsar extends JFrame
         tabla.setRowHeight(22);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
  
-        // Al seleccionar una fila, actualiza oeste (binomio) y este (evento)
+      
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
@@ -272,7 +272,7 @@ public class JFKsar extends JFrame
  
         JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
         filaConsulta.setBackground(Color.WHITE);
-        String[] consultas = {"Listar guías y perros", "Filtrar misiones", "Historial por fecha", "Mayor desempeño"};
+        String[] consultas = {"Listar guías y perros", "Filtrar misiones", "Mayor desempeño"};
         for (String texto : consultas) {
             JButton btn = new JButton(texto);
             btn.setFocusPainted(false);
@@ -285,9 +285,6 @@ public class JFKsar extends JFrame
                 btn.addActionListener(e -> new JFFiltrarMision(sistema).setVisible(true));
             }
  
-            if (texto.equals("Historial por fecha")) {
-                btn.addActionListener(e -> new JFHistorialMisiones(sistema).setVisible(true));
-            }
  
             if (texto.equals("Mayor desempeño")) {
                 btn.addActionListener(e -> new JFMayorDesempeño(sistema).setVisible(true));
