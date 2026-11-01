@@ -146,12 +146,8 @@ public class Mision
     }
 
     public boolean validarFecha(){
-    if(fecha == null || !fecha.esValida()){
-        return false;
+    return fecha != null && fecha.esValida() && !fecha.esPosteriorAHoy();
     }
-
-    return true;
-   }
     
     public boolean validarDatos(){
     return horasLabor >= 0 && sobrevivientes >= 0 && fallecidos >= 0;

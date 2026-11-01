@@ -105,7 +105,8 @@ public class Fecha
      
      public boolean esPosteriorAHoy() {
         return compararCon(Fecha.hoy()) > 0;
-     }    
+     }
+     
 
      public String mostrarFecha() {
         return String.format("%04d-%02d-%02d", anio, mes, dia);
