@@ -489,7 +489,48 @@ public class SistemaKsar
         }
         return nombres;
     }
+    
+     // // ==================== BUSQUEDA DE MISIONES POR MAYOR DESEMPEÑO RF7 ====================
 
+    public ArrayList<Mision> buscarMayorDesempeno() {
+    ArrayList<Mision> ganadoras = new ArrayList<>();
+    int mayor = 0;
+
+    // hallar el mayor desempeño
+    for (Mision m : misiones) {
+        int desempeno = m.calcularDesempeno();
+        if (desempeno > mayor) {
+            mayor = desempeno;
+        }
+    }
+
+    // agrega todas las misiones que tengan ese desempeño
+    for (Mision m : misiones) {
+        if (m.calcularDesempeno() == mayor) {
+            ganadoras.add(m);
+        }
+    }
+    return ganadoras;
+   }
+   
+    // // ==================== CONSULTAR BINOMIOS DISPONIBLES  RF8 ====================
+     
+    public String listarBinomiosDisponibles() {
+    String r = "";
+    int cantidad = 0;
+    for (Binomio b : binomios) {
+        if (b.estaDisponible()) {
+            r += b.enlistar();
+            cantidad++;
+        }
+    }
+    
+    if (cantidad == 0) {
+        return "No hay binomios disponibles en este momento.";
+    }
+    return "Binomios disponibles: " + cantidad + "\n\n" + r;
+   }  
+ 
     // BUSQUEDAS PARA LA VENTANA PRINCIPAL
 
     

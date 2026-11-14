@@ -129,6 +129,15 @@ public class Binomio
         return g + " + " + p;
     }
     
+
+    public String enlistar() {
+    String r = "Guía: " + guia.getNombreCompleto() + " (C.I. " + guia.getCedula() + ")\n"
+             + "Perro: " + perro.getNombre() + " (" + perro.getCodigo() + ") - " + perro.getRaza() + "\n"
+             + "Equipo: " + (equipo != null ? equipo.getNombre() : "Sin equipo") + "\n"
+             + "Misiones realizadas: " + cantidadMisiones + "\n\n";
+    return r;
+   }
+   
      @Override
      public String toString() {
     return "Estado: " + (estado ? "Disponible" : "No disponible") + "\n" +
