@@ -1,7 +1,4 @@
-package Proyecto.Principal;
-import Proyecto.Modelo.SistemaKsar;
-import Proyecto.Vista.JFKsar;
-import javax.swing.SwingUtilities;
+package Proyecto;
 
 
 /**
@@ -12,7 +9,7 @@ import javax.swing.SwingUtilities;
  */
 public class Main
 {
-    private static final boolean CARGAR_DATOS_PRUEBA = true;
+      private static final boolean CARGAR_DATOS_PRUEBA = true;
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

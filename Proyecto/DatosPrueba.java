@@ -1,4 +1,4 @@
-package Proyecto.Principal;
+package Proyecto;
 import Proyecto.Modelo.Certificacion;
 import Proyecto.Modelo.Fecha;
 import Proyecto.Modelo.SistemaKsar;
@@ -55,5 +55,4 @@ public class DatosPrueba
         s.registrarMision(new Fecha(11, 7, 2026), s.getEventos().get(1), s.getBinomios().get(1), 8, 2, 0);
         // El tercer evento queda sin mision, para probar "Registrar misión"
     }
-    
 }
