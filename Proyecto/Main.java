@@ -2,6 +2,7 @@ package Proyecto;
 import Proyecto.Modelo.*;
 import Proyecto.Vista.*;
 import Proyecto.Controlador.*;
+import javax.swing.SwingUtilities;
 
 /**
  * Write a description of class Main here.
@@ -11,15 +12,15 @@ import Proyecto.Controlador.*;
  */
 public class Main
 {
-      private static final boolean CARGAR_DATOS_PRUEBA = true;
+    private static final boolean CARGAR_DATOS_PRUEBA = true;
 
-    public static void main(String[] args){
-        SistemaKsar modelo = new SistemaKsar();
-        if(CARGAR_DATOS_PRUEBA){
-            DatosPrueba.cargar(modelo);
+    public static void main(String[] args) {
+        SistemaKsar modeloSistema = new SistemaKsar();
+        if (CARGAR_DATOS_PRUEBA) {
+            DatosPrueba.cargar(modeloSistema);
         }
-        JFKsar vista = new JFKsar();
-        Control control = new Control(modelo, vista);
-        vista.setVisible(true);
+        JFKsar vistaKsar = new JFKsar();
+        Control control = new Control(modeloSistema, vistaKsar);
+        vistaKsar.setVisible(true);
     }
 }

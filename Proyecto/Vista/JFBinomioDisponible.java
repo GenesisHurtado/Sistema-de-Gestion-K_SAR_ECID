@@ -10,7 +10,6 @@ import java.awt.*;
  */
 public class JFBinomioDisponible extends JFrame
 {
-    
     private JTextArea txtResultado;
     private JButton btnConsultar;
     private JButton btnCerrar;

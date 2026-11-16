@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class JFFiltrarMision extends JFrame
 {
-    public static final String TODOS = "Todos";
+     public static final String TODOS = "Todos";
  
     private SistemaKsar sistema;
     private JComboBox<String> cmbEquipo;
@@ -79,13 +79,13 @@ public class JFFiltrarMision extends JFrame
         cmbMunicipio = new JComboBox<>();
         cmbMunicipio.addItem(TODOS);
        
-        JButton btnFiltrar = new JButton("Filtrar");
+        btnFiltrar = new JButton("Filtrar");
         btnFiltrar.setBackground(new Color(15, 32, 68));
         btnFiltrar.setForeground(Color.WHITE);
         btnFiltrar.setFocusPainted(false);
        
  
-        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setFocusPainted(false);
        
  
@@ -118,11 +118,10 @@ public class JFFiltrarMision extends JFrame
         sur.setBackground(Color.WHITE);
         sur.setBorder(BorderFactory.createEmptyBorder(6, 12, 6, 12));
         lblResumen = new JLabel(" ");
-        JButton cerrar = new JButton("Cerrar");
-        cerrar.setFocusPainted(false);
-        cerrar.addActionListener(e -> dispose());
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setFocusPainted(false);
         sur.add(lblResumen, BorderLayout.CENTER);
-        sur.add(cerrar, BorderLayout.EAST);
+        sur.add(btnCerrar, BorderLayout.EAST);
         return sur;
     }
  

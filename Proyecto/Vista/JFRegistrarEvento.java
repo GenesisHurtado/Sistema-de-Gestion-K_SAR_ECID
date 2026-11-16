@@ -1,19 +1,15 @@
 package Proyecto.Vista;
 import javax.swing.*;
 import java.awt.*;
-
-
 /**
- * Write a description of class JFResgistrarEvento here.
+ * Write a description of class JFRegistrarEvento here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class JFResgistrarEvento extends JFrame
+public class JFRegistrarEvento  extends JFrame
 {
-    
-
-    // Datos del evento
+      // Datos del evento
     private JComboBox<String> cmbTipo;
     private JPanelFecha pnlFecha;
     private JTextField txtMagnitud;
@@ -38,7 +34,7 @@ public class JFResgistrarEvento extends JFrame
     private JButton btnGuardar;
     private JButton btnCancelar;
     
-     public JFResgistrarEvento( ) {
+     public JFRegistrarEvento( ) {
         
          
         setTitle("Registrar evento");
@@ -83,7 +79,7 @@ public class JFResgistrarEvento extends JFrame
         JPanel centro = new JPanel(new BorderLayout());
         centro.setBackground(Color.WHITE);
 
-        // Tipo y fecha del evento
+     
         JPanel general = new JPanel(new GridBagLayout());
         general.setBackground(Color.WHITE);
         general.setBorder(BorderFactory.createTitledBorder("Datos del evento"));
@@ -93,7 +89,7 @@ public class JFResgistrarEvento extends JFrame
         agregarFila(general, 0, "Tipo de evento:", cmbTipo);
         agregarFila(general, 1, "Fecha del evento:", pnlFecha);
 
-        // Datos propios de cada tipo (izquierda) y ubicacion (derecha)
+        
         JPanel medio = new JPanel(new GridLayout(1, 2));
         medio.setBackground(Color.WHITE);
 
@@ -136,11 +132,10 @@ public class JFResgistrarEvento extends JFrame
         agregarFila(ubicacion, 4, "Calle / avenida:", txtCalle);
         agregarFila(ubicacion, 5, "Número:", txtNumero);
         agregarFila(ubicacion, 6, "Barrio:", txtBarrio);
-        JButton btnUbicacion = new JButton("Registrar ubicación");
+        btnUbicacion = new JButton("Registrar ubicación");
         btnUbicacion.setFocusPainted(false);
      
         agregarFila(ubicacion, 7, "", btnUbicacion);
-
         
       
         medio.add(tipos);
@@ -292,5 +287,4 @@ public class JFResgistrarEvento extends JFrame
    //End GetterSetterExtension Source Code
 
 
-   
 }

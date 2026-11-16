@@ -441,6 +441,15 @@ public class JFKsar extends JFrame
                 ? ev.getLugar().getMunicipio().getNombre() : "—"));
         lblFecha.setText("Fecha: " + (ev.getFecha() != null ? ev.getFecha().toString() : "—"));
     }
+    
+    
+    public Mision getMisionSeleccionada() {
+    int fila = tabla.getSelectedRow();
+    if (fila >= 0 && fila < mostradas.size()) {
+        return mostradas.get(fila);
+    }
+    return null;
+    }
 
     public void limpiarDetalle() {
         mostrarBinomio(null);

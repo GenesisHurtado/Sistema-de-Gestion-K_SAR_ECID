@@ -3,12 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Armar binomio (Andrés).
- * Acciones en la vista. Mensaje en TextArea al armar.
+ * Write a description of class JFArmarBinomio here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 public class JFArmarBinomio extends JFrame
 {
-   
     private JComboBox<String> cmbGuia;
     private JComboBox<String> cmbPerro;
     private JComboBox<String> cmbEquipo;
@@ -87,16 +88,16 @@ public class JFArmarBinomio extends JFrame
      private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout());
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Armar binomio");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
+        btnArmar = new JButton("Armar binomio");
+        btnArmar.setBackground(new Color(15, 32, 68));
+        btnArmar.setForeground(Color.WHITE);
+        btnArmar.setFocusPainted(false);
       
-        JButton cancelar = new JButton("Cancelar");
+        btnCancelar = new JButton("Cancelar");
      
-        sur.add(btn);
-        sur.add(cancelar);
-         return sur;
+        sur.add(btnArmar);
+        sur.add(btnCancelar);
+        return sur;
     }
 
     //Start GetterSetterExtension Source Code
@@ -132,5 +133,4 @@ public class JFArmarBinomio extends JFrame
     }//end method getBtnCancelar
 
    //End GetterSetterExtension Source Code
-
 }
