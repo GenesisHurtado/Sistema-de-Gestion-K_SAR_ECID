@@ -595,5 +595,28 @@ public class SistemaKsar
              + "\nSuma: " + suma
              + "\nPromedio: " + promedio;
     }
-    
+
+    // RF9: historial de misiones ordenado por fecha
+    public ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones) {
+        ArrayList<Mision> ordenadas = new ArrayList<>();
+        if (misiones == null) {
+            return ordenadas;
+        }
+        for (int i = 0; i < misiones.size(); i++) {
+            ordenadas.add(misiones.get(i));
+        }
+        for (int i = 0; i < ordenadas.size() - 1; i++) {
+            for (int j = i + 1; j < ordenadas.size(); j++) {
+                Mision m1 = ordenadas.get(i);
+                Mision m2 = ordenadas.get(j);
+                if (m1.getFecha() != null && m2.getFecha() != null
+                        && m1.getFecha().compararCon(m2.getFecha()) > 0) {
+                    ordenadas.set(i, m2);
+                    ordenadas.set(j, m1);
+                }
+            }
+        }
+        return ordenadas;
+    }
+
 }
