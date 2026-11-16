@@ -116,6 +116,12 @@ public class Control
          }
         });
 
+        vistaKsar.getBtnDesempenoConjunto().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                vistaKsar.mostrarMensajeEmergente(modeloSistema.calcularDesempenoConjunto());
+            }
+        });
+
         vistaKsar.getBtnRegistrarEquipo().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 formularioRegistrarEquipo.getTxtNombre().setText("");
@@ -670,7 +676,7 @@ public class Control
     }
 
    
-    private ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones){
+    public ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones){
     ArrayList<Mision> ordenadas = new ArrayList<>();
     for(int i = 0; i < misiones.size(); i++){
         ordenadas.add(misiones.get(i));
@@ -680,7 +686,8 @@ public class Control
         for(int j = i + 1; j < ordenadas.size(); j++){
             Mision m1 = ordenadas.get(i);
             Mision m2 = ordenadas.get(j);
-            if(m1.getFecha().compararCon(m2.getFecha()) > 0){
+            if(m1.getFecha() != null && m2.getFecha() != null
+                    && m1.getFecha().compararCon(m2.getFecha()) > 0){
                 ordenadas.set(i, m2);
                 ordenadas.set(j, m1);
             }

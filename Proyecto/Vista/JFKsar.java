@@ -50,6 +50,7 @@ public class JFKsar extends JFrame
     private JButton btnFiltrarMision;
     private JButton btnMayorDesempeno;
     private JButton btnDesempeno;
+    private JButton btnDesempenoConjunto;
     private JButton btnBinomiosDisponibles;
 
     // Tabla 
@@ -262,11 +263,13 @@ public class JFKsar extends JFrame
         btnFiltrarMision = new JButton("Filtrar misiones");
         btnMayorDesempeno = new JButton("Mayor desempeño");
         btnDesempeno = new JButton("Desempeño");
+        btnDesempenoConjunto = new JButton("Desempeño conjunto");
         btnBinomiosDisponibles = new JButton("Binomios disponibles");
         btnListarGuiaPerro.setFocusPainted(false);
         btnFiltrarMision.setFocusPainted(false);
         btnMayorDesempeno.setFocusPainted(false);
         btnDesempeno.setFocusPainted(false);
+        btnDesempenoConjunto.setFocusPainted(false);
         btnBinomiosDisponibles.setFocusPainted(false);
 
         JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
@@ -275,6 +278,7 @@ public class JFKsar extends JFrame
         filaConsulta.add(btnFiltrarMision);
         
         filaConsulta.add(btnDesempeno);
+        filaConsulta.add(btnDesempenoConjunto);
         filaConsulta.add(btnMayorDesempeno);
         filaConsulta.add(btnBinomiosDisponibles);
 
@@ -350,6 +354,10 @@ public class JFKsar extends JFrame
         return this.btnDesempeno;
     }//end method getBtnDesempeno
 
+    public JButton getBtnDesempenoConjunto(){
+        return this.btnDesempenoConjunto;
+    }
+
     /**GET Method Propertie btnMayorDesempeno*/
     public JButton getBtnMayorDesempeno(){
         return this.btnMayorDesempeno;
@@ -372,6 +380,10 @@ public class JFKsar extends JFrame
 
     public void mostrarMensaje(String mensaje) {
         lblMensaje.setText(mensaje);
+    }
+
+    public void mostrarMensajeEmergente(String texto) {
+        JOptionPane.showMessageDialog(this, texto, "Desempeño conjunto", JOptionPane.INFORMATION_MESSAGE);
     }
 
   

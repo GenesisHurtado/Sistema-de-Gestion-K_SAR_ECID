@@ -116,6 +116,13 @@ public class Perro
     public boolean validarAptitudFisica() {
         return estaVigente() && edad > 0;
     }
+
+    public void cambiarCertificacion(Certificacion nueva){
+        this.certificacion = nueva;
+        if(binomio != null){
+            binomio.actualizarEstado();
+        }
+    }
     
     @Override
     public String toString() {

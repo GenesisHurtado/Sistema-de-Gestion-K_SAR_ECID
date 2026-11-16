@@ -430,7 +430,7 @@ public class SistemaKsar
     public String actualizarCertificacionGuia(String cedula, Certificacion nueva) {
         Guia g = buscarGuia(cedula);
         if (g == null) return "No se encontró el guía.";
-        g.setCertificacion(nueva);
+        g.cambiarCertificacion(nueva);
         return "Certificación del guía actualizada.";
     }
 
@@ -438,7 +438,7 @@ public class SistemaKsar
     public String actualizarCertificacionPerro(String codigo, Certificacion nueva) {
         Perro p = buscarPerro(codigo);
         if (p == null) return "No se encontró el perro.";
-        p.setCertificacion(nueva);
+        p.cambiarCertificacion(nueva);
         return "Certificación del perro actualizada.";
     }
 
@@ -579,6 +579,21 @@ public class SistemaKsar
             if (b.estaDisponible()) n++;
         }
         return n;
+    }
+
+    // RF6: desempeño del conjunto de todas las misiones
+    public String calcularDesempenoConjunto() {
+        if (misiones.isEmpty()) {
+            return "No hay misiones registradas.";
+        }
+        int suma = 0;
+        for (Mision m : misiones) {
+            suma += m.calcularDesempeno();
+        }
+        double promedio = suma / (double) misiones.size();
+        return "Desempeño del conjunto:\nMisiones: " + misiones.size()
+             + "\nSuma: " + suma
+             + "\nPromedio: " + promedio;
     }
     
 }
