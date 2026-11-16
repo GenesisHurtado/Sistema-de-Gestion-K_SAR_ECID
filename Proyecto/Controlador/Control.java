@@ -89,10 +89,7 @@ public class Control
                     return;
                 }
                 
-                ArrayList<Mision> misiones = new ArrayList<>();
-                for(Binomio b : binomios){
-                    misiones.addAll(b.getMisiones());
-                }
+                ArrayList<Mision> misiones = modeloSistema.misionesDeBinomios(binomios);
                 mostrarHistorial(misiones);
                 vistaKsar.mostrarBinomio(binomios.get(0));
                 vistaKsar.mostrarMensaje(misiones.isEmpty() ? "El binomio no tiene misiones registradas." : " ");

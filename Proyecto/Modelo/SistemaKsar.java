@@ -610,6 +610,20 @@ public class SistemaKsar
         return resultado;
     }
 
+    // Junta las misiones de una lista de binomios
+    public ArrayList<Mision> misionesDeBinomios(ArrayList<Binomio> lista) {
+        ArrayList<Mision> resultado = new ArrayList<>();
+        if (lista == null) {
+            return resultado;
+        }
+        for (Binomio b : lista) {
+            if (b.getMisiones() != null) {
+                resultado.addAll(b.getMisiones());
+            }
+        }
+        return resultado;
+    }
+
     public int contarBinomiosDisponibles() {
         int n = 0;
         for (Binomio b : binomios) {

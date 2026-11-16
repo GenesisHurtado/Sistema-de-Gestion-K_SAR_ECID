@@ -15,7 +15,6 @@ public class JFFiltrarMision extends JFrame
 {
      public static final String TODOS = "Todos";
  
-    private SistemaKsar sistema;
     private JComboBox<String> cmbEquipo;
     private JComboBox<String> cmbMunicipio;
     private DefaultTableModel modelo;
