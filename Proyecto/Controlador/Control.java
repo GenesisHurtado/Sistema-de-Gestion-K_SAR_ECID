@@ -676,6 +676,7 @@ public class Control
     }
 
    
+    // RF9: historial de misiones ordenado por fecha
     public ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones){
     ArrayList<Mision> ordenadas = new ArrayList<>();
     for(int i = 0; i < misiones.size(); i++){
