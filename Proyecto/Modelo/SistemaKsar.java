@@ -490,7 +490,22 @@ public class SistemaKsar
         return nombres;
     }
     
-     // // ==================== BUSQUEDA DE MISIONES POR MAYOR DESEMPEÑO RF7 ====================
+    // ====================DESEMPEÑO DEL CONJUNTO DE TODAS LAS MISIONES RF6============
+    public String calcularDesempenoConjunto() {
+        if (misiones.isEmpty()) {
+            return "No hay misiones registradas.";
+        }
+        int suma = 0;
+        for (Mision m : misiones) {
+            suma += m.calcularDesempeno();
+        }
+        double promedio = suma / (double) misiones.size();
+        return "Desempeño del conjunto:\nMisiones: " + misiones.size()
+             + "\nSuma: " + suma
+             + "\nPromedio: " + promedio;
+    }
+    
+     //  ==================== BUSQUEDA DE MISIONES POR MAYOR DESEMPEÑO RF7 ====================
 
     public ArrayList<Mision> buscarMayorDesempeno() {
     ArrayList<Mision> ganadoras = new ArrayList<>();
@@ -513,7 +528,7 @@ public class SistemaKsar
     return ganadoras;
    }
    
-    // // ==================== CONSULTAR BINOMIOS DISPONIBLES  RF8 ====================
+    //  ==================== CONSULTAR BINOMIOS DISPONIBLES  RF8 ====================
      
     public String listarBinomiosDisponibles() {
     String r = "";
@@ -530,7 +545,29 @@ public class SistemaKsar
     }
     return "Binomios disponibles: " + cantidad + "\n\n" + r;
    }  
- 
+   
+   // ================= HISTORIAL DE MISIONES ORDENADO POR FECHA  RF9====================00
+    public ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones) {
+        ArrayList<Mision> ordenadas = new ArrayList<>();
+        if (misiones == null) {
+            return ordenadas;
+        }
+        for (int i = 0; i < misiones.size(); i++) {
+            ordenadas.add(misiones.get(i));
+        }
+        for (int i = 0; i < ordenadas.size() - 1; i++) {
+            for (int j = i + 1; j < ordenadas.size(); j++) {
+                Mision m1 = ordenadas.get(i);
+                Mision m2 = ordenadas.get(j);
+                if (m1.getFecha() != null && m2.getFecha() != null
+                        && m1.getFecha().compararCon(m2.getFecha()) > 0) {
+                    ordenadas.set(i, m2);
+                    ordenadas.set(j, m1);
+                }
+            }
+        }
+        return ordenadas;
+    }
     // BUSQUEDAS PARA LA VENTANA PRINCIPAL
 
     
@@ -581,42 +618,6 @@ public class SistemaKsar
         return n;
     }
 
-    // RF6: desempeño del conjunto de todas las misiones
-    public String calcularDesempenoConjunto() {
-        if (misiones.isEmpty()) {
-            return "No hay misiones registradas.";
-        }
-        int suma = 0;
-        for (Mision m : misiones) {
-            suma += m.calcularDesempeno();
-        }
-        double promedio = suma / (double) misiones.size();
-        return "Desempeño del conjunto:\nMisiones: " + misiones.size()
-             + "\nSuma: " + suma
-             + "\nPromedio: " + promedio;
-    }
-
-    // RF9: historial de misiones ordenado por fecha
-    public ArrayList<Mision> ordenarPorFecha(ArrayList<Mision> misiones) {
-        ArrayList<Mision> ordenadas = new ArrayList<>();
-        if (misiones == null) {
-            return ordenadas;
-        }
-        for (int i = 0; i < misiones.size(); i++) {
-            ordenadas.add(misiones.get(i));
-        }
-        for (int i = 0; i < ordenadas.size() - 1; i++) {
-            for (int j = i + 1; j < ordenadas.size(); j++) {
-                Mision m1 = ordenadas.get(i);
-                Mision m2 = ordenadas.get(j);
-                if (m1.getFecha() != null && m2.getFecha() != null
-                        && m1.getFecha().compararCon(m2.getFecha()) > 0) {
-                    ordenadas.set(i, m2);
-                    ordenadas.set(j, m1);
-                }
-            }
-        }
-        return ordenadas;
-    }
+    
 
 }
