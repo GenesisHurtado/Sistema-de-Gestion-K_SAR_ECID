@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +8,7 @@ import java.awt.*;
  */
 public class JFRegistrarGuia extends JFrame
 {
-    private SistemaKsar sistema;
+    
     private JTextField txtCedula;
     private JTextField txtNombre;
     private JComboBox<String> cmbCert;
@@ -17,8 +16,13 @@ public class JFRegistrarGuia extends JFrame
     private JComboBox<String> cmbCertAct;
     private JTextArea txtMensaje;
 
-    public JFRegistrarGuia(SistemaKsar sistema) {
-        this.sistema = sistema;
+    //Botones 
+    private JButton btnActualizar;
+    private JButton btnGuardar;
+    private JButton btnCancelar;
+
+    public JFRegistrarGuia( ) {
+       
         setTitle("Registrar guía");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 560);
@@ -74,19 +78,18 @@ public class JFRegistrarGuia extends JFrame
         agregarFila(datos, 2, "Certificación:", cmbCert);
 
         // RF4 - actualizar certificación (Andrés)
-        JPanel act = new JPanel(new GridBagLayout());
+         JPanel act = new JPanel(new GridBagLayout());
         act.setBackground(Color.WHITE);
         act.setBorder(BorderFactory.createTitledBorder("Actualizar certificación"));
         txtCedulaAct = new JTextField(15);
         cmbCertAct = new JComboBox<>(new String[]{"VIGENTE", "VENCIDA", "EN_TRAMITE"});
         agregarFila(act, 0, "Cédula:", txtCedulaAct);
         agregarFila(act, 1, "Nueva certificación:", cmbCertAct);
-        JButton btnAct = new JButton("Actualizar");
-        btnAct.setBackground(new Color(15, 32, 68));
-        btnAct.setForeground(Color.WHITE);
-        btnAct.setFocusPainted(false);
-        btnAct.addActionListener(e -> actualizar());
-        agregarFila(act, 2, "", btnAct);
+        btnActualizar = new JButton("Actualizar");
+        btnActualizar.setBackground(new Color(15, 32, 68));
+        btnActualizar.setForeground(Color.WHITE);
+        btnActualizar.setFocusPainted(false);
+        agregarFila(act, 2, "", btnActualizar);
 
         txtMensaje = new JTextArea(3, 20);
         txtMensaje.setEditable(false);
@@ -113,28 +116,67 @@ public class JFRegistrarGuia extends JFrame
     }
 
     private JPanel crearSur() {
-        JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
+         JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Guardar guía");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.addActionListener(e -> guardar());
-        JButton cancelar = new JButton("Cancelar");
-        cancelar.setFocusPainted(false);
-        cancelar.addActionListener(e -> dispose());
-        sur.add(btn);
-        sur.add(cancelar);
+        btnGuardar = new JButton("Guardar guía");
+        btnGuardar.setBackground(new Color(15, 32, 68));
+        btnGuardar.setForeground(Color.WHITE);
+        btnGuardar.setFocusPainted(false);
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setFocusPainted(false);
+       
+        sur.add(btnGuardar);
+        sur.add(btnCancelar);
         return sur;
     }
 
-    private void guardar() {
-        Certificacion c = Certificacion.valueOf((String) cmbCert.getSelectedItem());
-        txtMensaje.setText(sistema.registrarGuia(txtCedula.getText().trim(), txtNombre.getText().trim(), c));
-    }
+    //Start GetterSetterExtension Source Code
 
-    private void actualizar() {
-        Certificacion c = Certificacion.valueOf((String) cmbCertAct.getSelectedItem());
-        txtMensaje.setText(sistema.actualizarCertificacionGuia(txtCedulaAct.getText().trim(), c));
-    }
+    /**GET Method Propertie txtCedula*/
+    public JTextField getTxtCedula(){
+        return this.txtCedula;
+    }//end method getTxtCedula
+
+    /**GET Method Propertie txtNombre*/
+    public JTextField getTxtNombre(){
+        return this.txtNombre;
+    }//end method getTxtNombre
+
+    /**GET Method Propertie cmbCert*/
+    public JComboBox<String> getCmbCert(){
+        return this.cmbCert;
+    }//end method getCmbCert
+
+    /**GET Method Propertie txtCedulaAct*/
+    public JTextField getTxtCedulaAct(){
+        return this.txtCedulaAct;
+    }//end method getTxtCedulaAct
+
+    /**GET Method Propertie cmbCertAct*/
+    public JComboBox<String> getCmbCertAct(){
+        return this.cmbCertAct;
+    }//end method getCmbCertAct
+
+    /**GET Method Propertie txtMensaje*/
+    public JTextArea getTxtMensaje(){
+        return this.txtMensaje;
+    }//end method getTxtMensaje
+
+    /**GET Method Propertie btnActualizar*/
+    public JButton getBtnActualizar(){
+        return this.btnActualizar;
+    }//end method getBtnActualizar
+
+    /**GET Method Propertie btnGuardar*/
+    public JButton getBtnGuardar(){
+        return this.btnGuardar;
+    }//end method getBtnGuardar
+
+    /**GET Method Propertie btnCancelar*/
+    public JButton getBtnCancelar(){
+        return this.btnCancelar;
+    }//end method getBtnCancelar
+
+   //End GetterSetterExtension Source Code
+
 }

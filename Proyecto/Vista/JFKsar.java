@@ -49,6 +49,8 @@ public class JFKsar extends JFrame
     private JButton btnListarGuiaPerro;
     private JButton btnFiltrarMision;
     private JButton btnMayorDesempeno;
+    private JButton btnDesempeno;
+    private JButton btnBinomiosDisponibles;
 
     // Tabla 
     private JTable tabla;
@@ -70,7 +72,7 @@ public class JFKsar extends JFrame
     }
 
     // ==================== NORTE ====================
-     private JPanel crearNorte() {
+    private JPanel crearNorte() {
         JPanel norte = new JPanel();
         norte.setLayout(new BoxLayout(norte, BoxLayout.Y_AXIS));
         norte.setBackground(Color.WHITE);
@@ -173,7 +175,8 @@ public class JFKsar extends JFrame
     private JPanel crearCentro() {
         JPanel centro = new JPanel(new BorderLayout());
         centro.setBackground(Color.WHITE);
-        centro.setBorder(BorderFactory.createTitledBorder("Historial de misiones"));
+        
+        centro.setBorder(BorderFactory.createTitledBorder("Historial de misiones (ordenado por fecha)"));
 
         String[] columnas = {"Código", "Fecha", "Lugar", "Equipo", "Horas", "Sobrevivientes", "Fallecidos"};
         modelo = new DefaultTableModel(columnas, 0);
@@ -182,6 +185,7 @@ public class JFKsar extends JFrame
         tabla.setRowHeight(22);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
@@ -257,26 +261,31 @@ public class JFKsar extends JFrame
         btnListarGuiaPerro = new JButton("Listar guías y perros");
         btnFiltrarMision = new JButton("Filtrar misiones");
         btnMayorDesempeno = new JButton("Mayor desempeño");
+        btnDesempeno = new JButton("Desempeño");
+        btnBinomiosDisponibles = new JButton("Binomios disponibles");
         btnListarGuiaPerro.setFocusPainted(false);
         btnFiltrarMision.setFocusPainted(false);
         btnMayorDesempeno.setFocusPainted(false);
+        btnDesempeno.setFocusPainted(false);
+        btnBinomiosDisponibles.setFocusPainted(false);
 
         JPanel filaConsulta = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
         filaConsulta.setBackground(Color.WHITE);
         filaConsulta.add(btnListarGuiaPerro);
         filaConsulta.add(btnFiltrarMision);
+        
+        filaConsulta.add(btnDesempeno);
         filaConsulta.add(btnMayorDesempeno);
+        filaConsulta.add(btnBinomiosDisponibles);
 
         sur.add(filaRegistro);
         sur.add(filaConsulta);
         return sur;
     }
 
-    // ==================== GETTERS PARA EL CONTROL ====================
-    
     //Start GetterSetterExtension Source Code
 
-      /**GET Method Propertie cmbCriterio*/
+    /**GET Method Propertie cmbCriterio*/
     public JComboBox<String> getCmbCriterio(){
         return this.cmbCriterio;
     }//end method getCmbCriterio
@@ -336,16 +345,24 @@ public class JFKsar extends JFrame
         return this.btnFiltrarMision;
     }//end method getBtnFiltrarMision
 
+    /**GET Method Propertie btnDesempeno*/
+    public JButton getBtnDesempeno(){
+        return this.btnDesempeno;
+    }//end method getBtnDesempeno
+
     /**GET Method Propertie btnMayorDesempeno*/
     public JButton getBtnMayorDesempeno(){
         return this.btnMayorDesempeno;
     }//end method getBtnMayorDesempeno
 
+    /**GET Method Propertie btnBinomiosDisponibles*/
+    public JButton getBtnBinomiosDisponibles(){
+        return this.btnBinomiosDisponibles;
+    }//end method getBtnBinomiosDisponibles
 
-   //End GetterSetterExtension Source Code
+    //End GetterSetterExtension Source Code
 
-    // ==================== MÉTODOS DE PRESENTACION ====================
-
+    // ==================== MÉTODOS PRESENTACIÓN====================
     
     public void actualizarContadores(int equipos, int misiones, int disponibles) {
         lblEquipos.setText(equipos + "  equipos");
@@ -357,20 +374,20 @@ public class JFKsar extends JFrame
         lblMensaje.setText(mensaje);
     }
 
-      
-      public void limpiarBusqueda() {
+  
+    public void limpiarBusqueda() {
         txtBuscar.setText("");
         lblMensaje.setText(" ");
-     }
+    }
 
-      public void seleccionarPrimeraFila() {
+    public void seleccionarPrimeraFila() {
         if (tabla.getRowCount() > 0) {
             tabla.setRowSelectionInterval(0, 0);
-         }
-     }
+        }
+    }
 
-    
-      public void mostrarMisiones(ArrayList<Mision> lista) {
+   
+    public void mostrarMisiones(ArrayList<Mision> lista) {
         mostradas = new ArrayList<>(lista);
         modelo.setRowCount(0);
         for (Mision m : mostradas) {
@@ -386,10 +403,10 @@ public class JFKsar extends JFrame
                 m.getFallecidos()
             });
         }
-     }
+    }
 
-      // Panel oeste
-      public void mostrarBinomio(Binomio b) {
+    // Panel oeste
+    public void mostrarBinomio(Binomio b) {
         if (b == null) {
             lblGuia.setText("Guía: —");
             lblCedula.setText("Cédula: —");
@@ -405,10 +422,10 @@ public class JFKsar extends JFrame
         lblCert.setText("Certificación: " + (g != null ? g.getCertificacion() : "—"));
         lblPerro.setText("Perro: " + (p != null ? p.getNombre() : "—"));
         lblRaza.setText("Raza: " + (p != null ? p.getRaza() : "—"));
-      }
+    }
 
-      // Panel este
-      public void mostrarEvento(Evento ev) {
+    // Panel este
+    public void mostrarEvento(Evento ev) {
         if (ev == null) {
             lblTipo.setText("Tipo: —");
             lblMagnitud.setText("Magnitud: —");
@@ -423,11 +440,11 @@ public class JFKsar extends JFrame
         lblMunicipio.setText("Municipio: " + (ev.getLugar() != null && ev.getLugar().getMunicipio() != null
                 ? ev.getLugar().getMunicipio().getNombre() : "—"));
         lblFecha.setText("Fecha: " + (ev.getFecha() != null ? ev.getFecha().toString() : "—"));
-      }
+    }
 
-      public void limpiarDetalle() {
+    public void limpiarDetalle() {
         mostrarBinomio(null);
         mostrarEvento(null);
-      }
+    }
        
   }

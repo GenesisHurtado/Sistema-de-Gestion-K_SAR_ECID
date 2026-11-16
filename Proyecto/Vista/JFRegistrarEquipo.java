@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,14 +12,18 @@ import java.awt.*;
  */
 public class JFRegistrarEquipo extends JFrame
 {
-    private SistemaKsar sistema;
+
     private JTextField txtNombre;
     private JPanelFecha pnlFecha;
-    private DefaultTableModel modelo;
+    private DefaultTableModel modeloTabla;
     private JTextArea txtMensaje;
+    
+    //Botones 
+    private JButton btnGuardar;
+    private JButton btnCancelar;
 
-    public JFRegistrarEquipo(SistemaKsar sistema) {
-        this.sistema = sistema;
+    public JFRegistrarEquipo( ) {
+     
         setTitle("Registrar equipo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(520, 560);
@@ -29,7 +32,7 @@ public class JFRegistrarEquipo extends JFrame
         add(crearNorte(), BorderLayout.NORTH);
         add(crearCentro(), BorderLayout.CENTER);
         add(crearSur(), BorderLayout.SOUTH);
-        cargarTabla();
+     
     }
 
     private JPanel crearNorte() {
@@ -78,8 +81,8 @@ public class JFRegistrarEquipo extends JFrame
         lista.setBackground(Color.WHITE);
         lista.setBorder(BorderFactory.createTitledBorder("Equipos registrados"));
         String[] cols = {"Nombre", "Fecha de creación", "Binomios"};
-        modelo = new DefaultTableModel(cols, 0);
-        lista.add(new JScrollPane(new JTable(modelo)), BorderLayout.CENTER);
+        modeloTabla = new DefaultTableModel(cols, 0);
+        lista.add(new JScrollPane(new JTable(modeloTabla)), BorderLayout.CENTER);
 
         txtMensaje = new JTextArea(3, 20);
         txtMensaje.setEditable(false);
@@ -93,6 +96,7 @@ public class JFRegistrarEquipo extends JFrame
         return centro;
     }
 
+  
     private void agregarFila(JPanel panel, int fila, String etiqueta, JComponent campo) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = fila;
@@ -106,31 +110,53 @@ public class JFRegistrarEquipo extends JFrame
         panel.add(campo, gbc);
     }
 
-    private JPanel crearSur() {
+     private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Guardar equipo");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.addActionListener(e -> guardar());
-        JButton cancelar = new JButton("Cancelar");
-        cancelar.setFocusPainted(false);
-        cancelar.addActionListener(e -> dispose());
-        sur.add(btn);
-        sur.add(cancelar);
+        btnGuardar = new JButton("Guardar equipo");
+        btnGuardar.setBackground(new Color(15, 32, 68));
+        btnGuardar.setForeground(Color.WHITE);
+        btnGuardar.setFocusPainted(false);
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setFocusPainted(false);
+     
+        sur.add(btnGuardar);
+        sur.add(btnCancelar);
         return sur;
     }
 
-    private void guardar() {
-        txtMensaje.setText(sistema.registrarEquipo(txtNombre.getText().trim(), pnlFecha.getFecha()));
-        cargarTabla();
-    }
+    //Start GetterSetterExtension Source Code
 
-    private void cargarTabla() {
-        modelo.setRowCount(0);
-        for (Equipo e : sistema.getEquipos()) {
-            modelo.addRow(new Object[]{e.getNombre(), e.getFechaCreacion(), e.getBinomios().size()});
-        }
-    }
+    /**GET Method Propertie txtNombre*/
+    public JTextField getTxtNombre(){
+        return this.txtNombre;
+    }//end method getTxtNombre
+
+    /**GET Method Propertie pnlFecha*/
+    public JPanelFecha getPnlFecha(){
+        return this.pnlFecha;
+    }//end method getPnlFecha
+
+    /**GET Method Propertie modeloTabla*/
+    public DefaultTableModel getModeloTabla(){
+        return this.modeloTabla;
+    }//end method getModeloTabla
+
+    /**GET Method Propertie txtMensaje*/
+    public JTextArea getTxtMensaje(){
+        return this.txtMensaje;
+    }//end method getTxtMensaje
+
+    /**GET Method Propertie btnGuardar*/
+    public JButton getBtnGuardar(){
+        return this.btnGuardar;
+    }//end method getBtnGuardar
+
+    /**GET Method Propertie btnCancelar*/
+    public JButton getBtnCancelar(){
+        return this.btnCancelar;
+    }//end method getBtnCancelar
+
+    //End GetterSetterExtension Source Code 
+
 }

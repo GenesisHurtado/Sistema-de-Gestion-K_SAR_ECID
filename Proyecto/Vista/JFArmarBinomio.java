@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,14 +8,20 @@ import java.awt.*;
  */
 public class JFArmarBinomio extends JFrame
 {
-    private SistemaKsar sistema;
+   
     private JComboBox<String> cmbGuia;
     private JComboBox<String> cmbPerro;
     private JComboBox<String> cmbEquipo;
     private JTextArea txtMensaje;
+    
+    //Botones
+    
+    private JButton btnArmar;
+    private JButton btnCancelar;
 
-    public JFArmarBinomio(SistemaKsar sistema) {
-        this.sistema = sistema;
+
+    public JFArmarBinomio(  ) {
+      
         setTitle("Armar binomio");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(480, 420);
@@ -59,7 +64,7 @@ public class JFArmarBinomio extends JFrame
         cmbGuia = new JComboBox<>();
         cmbPerro = new JComboBox<>();
         cmbEquipo = new JComboBox<>();
-        cargarCombos();
+        
 
         agregar(centro, 0, "Guía disponible:", cmbGuia);
         agregar(centro, 1, "Perro disponible:", cmbPerro);
@@ -72,19 +77,6 @@ public class JFArmarBinomio extends JFrame
         return centro;
     }
 
-    private void cargarCombos() {
-        cmbGuia.removeAllItems();
-        for (Guia g : sistema.getGuias()) {
-            if (g.getBinomio() == null) cmbGuia.addItem(g.getCedula() + " - " + g.getNombreCompleto());
-        }
-        cmbPerro.removeAllItems();
-        for (Perro p : sistema.getPerros()) {
-            if (p.getBinomio() == null) cmbPerro.addItem(p.getCodigo() + " - " + p.getNombre());
-        }
-        cmbEquipo.removeAllItems();
-        for (Equipo e : sistema.getEquipos()) cmbEquipo.addItem(e.getNombre());
-    }
-
     private void agregar(JPanel p, int fila, String et, JComponent c) {
         GridBagConstraints g = new GridBagConstraints();
         g.gridy = fila; g.insets = new Insets(5, 6, 5, 6); g.anchor = GridBagConstraints.WEST;
@@ -92,30 +84,53 @@ public class JFArmarBinomio extends JFrame
         g.gridx = 1; g.weightx = 1; g.fill = GridBagConstraints.HORIZONTAL; p.add(c, g);
     }
 
-    private JPanel crearSur() {
+     private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout());
         sur.setBackground(Color.WHITE);
         JButton btn = new JButton("Armar binomio");
         btn.setBackground(new Color(15, 32, 68));
         btn.setForeground(Color.WHITE);
         btn.setFocusPainted(false);
-        btn.addActionListener(e -> armar());
+      
         JButton cancelar = new JButton("Cancelar");
-        cancelar.addActionListener(e -> dispose());
+     
         sur.add(btn);
         sur.add(cancelar);
-        return sur;
+         return sur;
     }
 
-    private void armar() {
-        if (cmbGuia.getSelectedItem() == null || cmbPerro.getSelectedItem() == null || cmbEquipo.getSelectedItem() == null) {
-            txtMensaje.setText("Faltan datos para armar el binomio.");
-            return;
-        }
-        String cedula = ((String) cmbGuia.getSelectedItem()).split(" - ")[0];
-        String codigo = ((String) cmbPerro.getSelectedItem()).split(" - ")[0];
-        String equipo = (String) cmbEquipo.getSelectedItem();
-        txtMensaje.setText(sistema.armarBinomio(cedula, codigo, equipo));
-        cargarCombos();
-    }
+    //Start GetterSetterExtension Source Code
+
+    /**GET Method Propertie cmbGuia*/
+    public JComboBox<String> getCmbGuia(){
+        return this.cmbGuia;
+    }//end method getCmbGuia
+
+    /**GET Method Propertie cmbPerro*/
+    public JComboBox<String> getCmbPerro(){
+        return this.cmbPerro;
+    }//end method getCmbPerro
+
+    /**GET Method Propertie cmbEquipo*/
+    public JComboBox<String> getCmbEquipo(){
+        return this.cmbEquipo;
+    }//end method getCmbEquipo
+
+    /**GET Method Propertie txtMensaje*/
+    public JTextArea getTxtMensaje(){
+        return this.txtMensaje;
+    }//end method getTxtMensaje
+
+    /**GET Method Propertie btnArmar*/
+    public JButton getBtnArmar(){
+        return this.btnArmar;
+    }//end method getBtnArmar
+
+    /**GET Method Propertie btnCancelar*/
+    public JButton getBtnCancelar(){
+        return this.btnCancelar;
+    }//end method getBtnCancelar
+
+   //End GetterSetterExtension Source Code
+
 }

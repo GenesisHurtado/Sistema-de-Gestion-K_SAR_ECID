@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,11 +11,15 @@ import java.awt.*;
 public class JFMayorDesempeño extends JFrame
 {
     
-    private SistemaKsar sistema;
+    
     private JTextArea txtResultado;
+    
+    //Botones 
+    private JButton btnBuscar;
+    private JButton btnCerrar;
 
-    public JFMayorDesempeño(SistemaKsar sistema) {
-        this.sistema = sistema;
+    public JFMayorDesempeño( ) {
+        
         setTitle("Mayor desempeño");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 420);
@@ -68,24 +71,38 @@ public class JFMayorDesempeño extends JFrame
     }
     
     private JPanel crearSur() {
-        JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
+      JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Buscar mayor desempeño");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.addActionListener(e -> buscar());
-        JButton cerrar = new JButton("Cerrar");
-        cerrar.setFocusPainted(false);
-        cerrar.addActionListener(e -> dispose());
-        sur.add(btn);
-        sur.add(cerrar);
+        btnBuscar = new JButton("Buscar mayor desempeño");
+        btnBuscar.setBackground(new Color(15, 32, 68));
+        btnBuscar.setForeground(Color.WHITE);
+        btnBuscar.setFocusPainted(false);
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setFocusPainted(false);
+   
+        sur.add(btnBuscar);
+        sur.add(btnCerrar);
         return sur;
     }
 
-    private void buscar() {
-        // Pendiente RF7: se conecta con el sistema cuando se implemente
-        txtResultado.setText("Esta consulta (RF7) se implementará en la siguiente entrega.");
-    }
-    
+    //Start GetterSetterExtension Source Code
+
+    /**GET Method Propertie txtResultado*/
+    public JTextArea getTxtResultado(){
+        return this.txtResultado;
+    }//end method getTxtResultado
+
+    /**GET Method Propertie btnBuscar*/
+    public JButton getBtnBuscar(){
+        return this.btnBuscar;
+    }//end method getBtnBuscar
+
+    /**GET Method Propertie btnCerrar*/
+    public JButton getBtnCerrar(){
+        return this.btnCerrar;
+    }//end method getBtnCerrar
+
+    //End GetterSetterExtension Source Code
+
+
 }

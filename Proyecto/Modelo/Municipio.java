@@ -67,7 +67,7 @@ public class Municipio
 //End GetterSetterExtension Source Code
 
 
-    // Metodos Operacionales
+    // METODOS OPERACIONALES
     
     public Lugar buscarLugar(String nombreLugar){
         for(Lugar l : lugares){

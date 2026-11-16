@@ -1,10 +1,7 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
-import Proyecto.Modelo.SistemaKsar;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+
 
 /**
  * Write a description of class JFResgistrarEvento here.
@@ -14,7 +11,7 @@ import java.awt.event.FocusEvent;
  */
 public class JFResgistrarEvento extends JFrame
 {
-    private SistemaKsar sistema;
+    
 
     // Datos del evento
     private JComboBox<String> cmbTipo;
@@ -35,8 +32,15 @@ public class JFResgistrarEvento extends JFrame
 
     private JTextArea txtMensaje;
     
-     public JFResgistrarEvento(SistemaKsar sistema) {
-        this.sistema = sistema;
+    // Botones
+    
+    private JButton btnUbicacion;
+    private JButton btnGuardar;
+    private JButton btnCancelar;
+    
+     public JFResgistrarEvento( ) {
+        
+         
         setTitle("Registrar evento");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -84,7 +88,7 @@ public class JFResgistrarEvento extends JFrame
         general.setBackground(Color.WHITE);
         general.setBorder(BorderFactory.createTitledBorder("Datos del evento"));
         cmbTipo = new JComboBox<>(new String[]{"Terremoto", "Deslave"});
-        cmbTipo.addActionListener(e -> cambiarTipo());
+        
         pnlFecha = new JPanelFecha();
         agregarFila(general, 0, "Tipo de evento:", cmbTipo);
         agregarFila(general, 1, "Fecha del evento:", pnlFecha);
@@ -134,22 +138,11 @@ public class JFResgistrarEvento extends JFrame
         agregarFila(ubicacion, 6, "Barrio:", txtBarrio);
         JButton btnUbicacion = new JButton("Registrar ubicación");
         btnUbicacion.setFocusPainted(false);
-        btnUbicacion.addActionListener(e -> registrarUbicacion());
+     
         agregarFila(ubicacion, 7, "", btnUbicacion);
 
         
-        txtCodigo.addFocusListener(new FocusAdapter() {
-            public void focusLost(FocusEvent e) {
-                completarPais();
-            }
-        });
-        
-        txtLugar.addFocusListener(new FocusAdapter() {
-            public void focusLost(FocusEvent e) {
-                completarLugar();
-            }
-        });
-
+      
         medio.add(tipos);
         medio.add(ubicacion);
 
@@ -181,21 +174,20 @@ public class JFResgistrarEvento extends JFrame
     private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Guardar evento");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.addActionListener(e -> guardar());
-        JButton cancelar = new JButton("Cancelar");
-        cancelar.setFocusPainted(false);
-        cancelar.addActionListener(e -> dispose());
-        sur.add(btn);
-        sur.add(cancelar);
+        btnGuardar = new JButton("Guardar evento");
+        btnGuardar.setBackground(new Color(15, 32, 68));
+        btnGuardar.setForeground(Color.WHITE);
+        btnGuardar.setFocusPainted(false);
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setFocusPainted(false);
+       
+        sur.add(btnGuardar);
+        sur.add(btnCancelar);
         return sur;
     }
 
     
-    private void cambiarTipo() {
+    public void cambiarTipo() {
         boolean esTerremoto = cmbTipo.getSelectedItem().equals("Terremoto");
         txtMagnitud.setEnabled(esTerremoto);
         txtEpicentro.setEnabled(esTerremoto);
@@ -210,59 +202,95 @@ public class JFResgistrarEvento extends JFrame
         }
     }
 
-    private void completarPais() {
-        Pais p = sistema.buscarPais(txtCodigo.getText().trim());
-        if (p != null) {
-            txtPais.setText(p.getNombre());
-        }
-    }
+     //Start GetterSetterExtension Source Code
 
-    private void completarLugar() {
-        Lugar l = sistema.buscarLugar(txtCodigo.getText().trim(), txtMunicipio.getText().trim(), txtLugar.getText().trim());
-        if (l != null) {
-            txtCalle.setText(l.getCalle());
-            txtNumero.setText(l.getNumero());
-            txtBarrio.setText(l.getBarrio());
-        }
-    }
+    /**GET Method Propertie cmbTipo*/
+    public JComboBox<String> getCmbTipo(){
+        return this.cmbTipo;
+    }//end method getCmbTipo
 
-    private String registrarUbicacionDelFormulario() {
-        return sistema.registrarUbicacion(txtPais.getText().trim(), txtCodigo.getText().trim(),
-                txtMunicipio.getText().trim(), txtLugar.getText().trim(),
-                txtCalle.getText().trim(), txtNumero.getText().trim(), txtBarrio.getText().trim());
-    }
+    /**GET Method Propertie pnlFecha*/
+    public JPanelFecha getPnlFecha(){
+        return this.pnlFecha;
+    }//end method getPnlFecha
 
-    private void registrarUbicacion() {
-        txtMensaje.setText(registrarUbicacionDelFormulario());
-    }
+    /**GET Method Propertie txtMagnitud*/
+    public JTextField getTxtMagnitud(){
+        return this.txtMagnitud;
+    }//end method getTxtMagnitud
 
-    private void guardar() {
+    /**GET Method Propertie txtEpicentro*/
+    public JTextField getTxtEpicentro(){
+        return this.txtEpicentro;
+    }//end method getTxtEpicentro
+
+    /**GET Method Propertie txtVolumen*/
+    public JTextField getTxtVolumen(){
+        return this.txtVolumen;
+    }//end method getTxtVolumen
+
+    /**GET Method Propertie txtZona*/
+    public JTextField getTxtZona(){
+        return this.txtZona;
+    }//end method getTxtZona
+
+    /**GET Method Propertie txtPais*/
+    public JTextField getTxtPais(){
+        return this.txtPais;
+    }//end method getTxtPais
+
+    /**GET Method Propertie txtCodigo*/
+    public JTextField getTxtCodigo(){
+        return this.txtCodigo;
+    }//end method getTxtCodigo
+
+    /**GET Method Propertie txtMunicipio*/
+    public JTextField getTxtMunicipio(){
+        return this.txtMunicipio;
+    }//end method getTxtMunicipio
+
+    /**GET Method Propertie txtLugar*/
+    public JTextField getTxtLugar(){
+        return this.txtLugar;
+    }//end method getTxtLugar
+
+    /**GET Method Propertie txtCalle*/
+    public JTextField getTxtCalle(){
+        return this.txtCalle;
+    }//end method getTxtCalle
+
+    /**GET Method Propertie txtNumero*/
+    public JTextField getTxtNumero(){
+        return this.txtNumero;
+    }//end method getTxtNumero
+
+    /**GET Method Propertie txtBarrio*/
+    public JTextField getTxtBarrio(){
+        return this.txtBarrio;
+    }//end method getTxtBarrio
+
+    /**GET Method Propertie txtMensaje*/
+    public JTextArea getTxtMensaje(){
+        return this.txtMensaje;
+    }//end method getTxtMensaje
+
+    /**GET Method Propertie btnUbicacion*/
+    public JButton getBtnUbicacion(){
+        return this.btnUbicacion;
+    }//end method getBtnUbicacion
+
+    /**GET Method Propertie btnGuardar*/
+    public JButton getBtnGuardar(){
+        return this.btnGuardar;
+    }//end method getBtnGuardar
+
+    /**GET Method Propertie btnCancelar*/
+    public JButton getBtnCancelar(){
+        return this.btnCancelar;
+    }//end method getBtnCancelar
+
+   //End GetterSetterExtension Source Code
+
+
    
-        String mensajeUbicacion = registrarUbicacionDelFormulario();
-        Lugar lugar = sistema.buscarLugar(txtCodigo.getText().trim(), txtMunicipio.getText().trim(), txtLugar.getText().trim());
-        if (lugar == null) {
-            txtMensaje.setText(mensajeUbicacion);
-            return;
-        }
-        Fecha fecha = pnlFecha.getFecha();
-        String mensajeEvento;
-        if (cmbTipo.getSelectedItem().equals("Terremoto")) {
-            try {
-              
-                double magnitud = txtMagnitud.getText().trim().isEmpty() ? 0 : Double.parseDouble(txtMagnitud.getText().trim().replace(',', '.'));
-                mensajeEvento = sistema.registrarTerremoto(fecha, magnitud, txtEpicentro.getText().trim(), lugar);
-            } catch (NumberFormatException ex) {
-                mensajeEvento = "La magnitud debe ser un número con un decimal (por ejemplo, 7.2).";
-            }
-        } else {
-            try {
-                int volumen = txtVolumen.getText().trim().isEmpty() ? 0 : Integer.parseInt(txtVolumen.getText().trim());
-                mensajeEvento = sistema.registrarDeslave(fecha, volumen, txtZona.getText().trim(), lugar);
-            } catch (NumberFormatException ex) {
-                mensajeEvento = "El volumen debe ser un número entero.";
-            }
-        }
-        txtMensaje.setText(mensajeUbicacion + "\n" + mensajeEvento);
-    }
-
 }

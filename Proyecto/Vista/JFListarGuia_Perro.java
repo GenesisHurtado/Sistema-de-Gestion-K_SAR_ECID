@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,12 +10,17 @@ import java.awt.*;
  */
 public class JFListarGuia_Perro extends JFrame 
 {
-    private SistemaKsar sistema;
+
     private JComboBox<String> cmbGuia;
     private JTextArea txtResultado;
+    
+    //Botones
+    private JButton btnPerros;
+    private JButton btnTodos;
+    private JButton btnCerrar;
 
-    public JFListarGuia_Perro(SistemaKsar sistema) {
-        this.sistema = sistema;
+    public JFListarGuia_Perro( ) {
+       
         setTitle("Listar guías y perros");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(560, 560);
@@ -25,7 +29,7 @@ public class JFListarGuia_Perro extends JFrame
         add(crearNorte(), BorderLayout.NORTH);
         add(crearCentro(), BorderLayout.CENTER);
         add(crearSur(), BorderLayout.SOUTH);
-        listarTodos();
+       
     }
     
     private JPanel crearNorte() {
@@ -55,21 +59,19 @@ public class JFListarGuia_Perro extends JFrame
         return barra;
     }
 
-    private JPanel crearCentro() {
+     private JPanel crearCentro() {
         JPanel centro = new JPanel(new BorderLayout());
         centro.setBackground(Color.WHITE);
 
-        // RF3 - perros de un guía
+        
         JPanel porGuia = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 8));
         porGuia.setBackground(Color.WHITE);
         porGuia.setBorder(BorderFactory.createTitledBorder("Perros por guía"));
         cmbGuia = new JComboBox<>();
-        for (Guia g : sistema.getGuias()) {
-            cmbGuia.addItem(g.getCedula() + " - " + g.getNombreCompleto());
-        }
-        JButton btnPerros = new JButton("Listar perros del guía");
+        
+        btnPerros = new JButton("Listar perros del guía");
         btnPerros.setFocusPainted(false);
-        btnPerros.addActionListener(e -> listarPerrosDelGuia());
+        
         porGuia.add(new JLabel("Guía:"));
         porGuia.add(cmbGuia);
         porGuia.add(btnPerros);
@@ -85,38 +87,49 @@ public class JFListarGuia_Perro extends JFrame
         return centro;
     }
 
-    private JPanel crearSur() {
+      private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btn = new JButton("Listar todos");
-        btn.setBackground(new Color(15, 32, 68));
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.addActionListener(e -> listarTodos());
-        JButton cerrar = new JButton("Cerrar");
-        cerrar.setFocusPainted(false);
-        cerrar.addActionListener(e -> dispose());
-        sur.add(btn);
-        sur.add(cerrar);
+        btnTodos = new JButton("Listar todos");
+        btnTodos.setBackground(new Color(15, 32, 68));
+        btnTodos.setForeground(Color.WHITE);
+        btnTodos.setFocusPainted(false);
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setFocusPainted(false);
+        
+        sur.add(btnTodos);
+        sur.add(btnCerrar);
         return sur;
     }
     
-     // RF2
-    private void listarTodos() {
-        txtResultado.setText(sistema.listarGuiasYPerros());
-        txtResultado.setCaretPosition(0);
-    }
+    //Start GetterSetterExtension Source Code
 
-    // RF3
-    private void listarPerrosDelGuia() {
-        if (cmbGuia.getSelectedItem() == null) {
-            txtResultado.setText("No hay guías registrados.");
-            return;
-        }
-        String cedula = ((String) cmbGuia.getSelectedItem()).split(" - ")[0];
-        txtResultado.setText(sistema.listarPerrosDelGuia(cedula));
-        txtResultado.setCaretPosition(0);
-    }
-    
-    
+    /**GET Method Propertie cmbGuia*/
+    public JComboBox<String> getCmbGuia(){
+        return this.cmbGuia;
+    }//end method getCmbGuia
+
+    /**GET Method Propertie txtResultado*/
+    public JTextArea getTxtResultado(){
+        return this.txtResultado;
+    }//end method getTxtResultado
+
+    /**GET Method Propertie btnPerros*/
+    public JButton getBtnPerros(){
+        return this.btnPerros;
+    }//end method getBtnPerros
+
+    /**GET Method Propertie btnTodos*/
+    public JButton getBtnTodos(){
+        return this.btnTodos;
+    }//end method getBtnTodos
+
+    /**GET Method Propertie btnCerrar*/
+    public JButton getBtnCerrar(){
+        return this.btnCerrar;
+    }//end method getBtnCerrar
+
+   //End GetterSetterExtension Source Code
+
+ 
 }

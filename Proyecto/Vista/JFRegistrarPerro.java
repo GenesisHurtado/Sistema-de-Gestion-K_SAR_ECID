@@ -1,5 +1,4 @@
 package Proyecto.Vista;
-import Proyecto.Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +8,7 @@ import java.awt.*;
  */
 public class JFRegistrarPerro extends JFrame
 {
-    private SistemaKsar sistema;
+ 
     private JTextField txtNombre;
     private JTextArea txtDescripcion;
     private JTextField txtRaza;
@@ -18,9 +17,13 @@ public class JFRegistrarPerro extends JFrame
     private JTextField txtCodigoAct;
     private JComboBox<String> cmbCertAct;
     private JTextArea txtMensaje;
-
-    public JFRegistrarPerro(SistemaKsar sistema) {
-        this.sistema = sistema;
+ 
+     // Botones 
+    private JButton btnActualizar;
+    private JButton btnGuardar;
+    private JButton btnCancelar;
+    public JFRegistrarPerro( ) {
+      
         setTitle("Registrar perro");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 560);
@@ -79,19 +82,19 @@ public class JFRegistrarPerro extends JFrame
         agregarFila(datos, 4, "Certificación:", cmbCertificacion);
 
         // RF4 (Andrés)
-        JPanel act = new JPanel(new GridBagLayout());
+          JPanel act = new JPanel(new GridBagLayout());
         act.setBackground(Color.WHITE);
         act.setBorder(BorderFactory.createTitledBorder("Actualizar certificación"));
         txtCodigoAct = new JTextField(15);
         cmbCertAct = new JComboBox<>(new String[]{"VIGENTE", "VENCIDA", "EN_TRAMITE"});
         agregarFila(act, 0, "Código:", txtCodigoAct);
         agregarFila(act, 1, "Nueva certificación:", cmbCertAct);
-        JButton btnAct = new JButton("Actualizar");
-        btnAct.setBackground(new Color(15, 32, 68));
-        btnAct.setForeground(Color.WHITE);
-        btnAct.setFocusPainted(false);
-        btnAct.addActionListener(e -> actualizar());
-        agregarFila(act, 2, "", btnAct);
+        btnActualizar = new JButton("Actualizar");
+        btnActualizar.setBackground(new Color(15, 32, 68));
+        btnActualizar.setForeground(Color.WHITE);
+        btnActualizar.setFocusPainted(false);
+        
+        agregarFila(act, 2, "", btnActualizar);
 
         txtMensaje = new JTextArea(3, 20);
         txtMensaje.setEditable(false);
@@ -119,32 +122,75 @@ public class JFRegistrarPerro extends JFrame
     private JPanel crearSur() {
         JPanel sur = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 8));
         sur.setBackground(Color.WHITE);
-        JButton btnRegistrar = new JButton("Guardar perro");
-        btnRegistrar.setBackground(new Color(15, 32, 68));
-        btnRegistrar.setForeground(Color.WHITE);
-        btnRegistrar.setFocusPainted(false);
-        btnRegistrar.addActionListener(e -> registrar());
-        JButton btnCancelar = new JButton("Cancelar");
+        btnGuardar = new JButton("Guardar perro");
+        btnGuardar.setBackground(new Color(15, 32, 68));
+        btnGuardar.setForeground(Color.WHITE);
+        btnGuardar.setFocusPainted(false);
+        btnCancelar = new JButton("Cancelar");
         btnCancelar.setFocusPainted(false);
-        btnCancelar.addActionListener(e -> dispose());
-        sur.add(btnRegistrar);
+       
+        sur.add(btnGuardar);
         sur.add(btnCancelar);
         return sur;
     }
 
-    private void registrar() {
-        try {
-            int edad = Integer.parseInt(txtEdad.getText().trim());
-            Certificacion c = Certificacion.valueOf((String) cmbCertificacion.getSelectedItem());
-            txtMensaje.setText(sistema.registrarPerro(txtNombre.getText().trim(),
-                    txtDescripcion.getText().trim(), txtRaza.getText().trim(), edad, c));
-        } catch (NumberFormatException ex) {
-            txtMensaje.setText("La edad debe ser un número.");
-        }
-    }
+    //Start GetterSetterExtension Source Code
 
-    private void actualizar() {
-        Certificacion c = Certificacion.valueOf((String) cmbCertAct.getSelectedItem());
-        txtMensaje.setText(sistema.actualizarCertificacionPerro(txtCodigoAct.getText().trim(), c));
-    }
+    /**GET Method Propertie txtNombre*/
+    public JTextField getTxtNombre(){
+        return this.txtNombre;
+    }//end method getTxtNombre
+
+    /**GET Method Propertie txtDescripcion*/
+    public JTextArea getTxtDescripcion(){
+        return this.txtDescripcion;
+    }//end method getTxtDescripcion
+
+    /**GET Method Propertie txtRaza*/
+    public JTextField getTxtRaza(){
+        return this.txtRaza;
+    }//end method getTxtRaza
+
+    /**GET Method Propertie txtEdad*/
+    public JTextField getTxtEdad(){
+        return this.txtEdad;
+    }//end method getTxtEdad
+
+    /**GET Method Propertie cmbCertificacion*/
+    public JComboBox<String> getCmbCertificacion(){
+        return this.cmbCertificacion;
+    }//end method getCmbCertificacion
+
+    /**GET Method Propertie txtCodigoAct*/
+    public JTextField getTxtCodigoAct(){
+        return this.txtCodigoAct;
+    }//end method getTxtCodigoAct
+
+    /**GET Method Propertie cmbCertAct*/
+    public JComboBox<String> getCmbCertAct(){
+        return this.cmbCertAct;
+    }//end method getCmbCertAct
+
+    /**GET Method Propertie txtMensaje*/
+    public JTextArea getTxtMensaje(){
+        return this.txtMensaje;
+    }//end method getTxtMensaje
+
+    /**GET Method Propertie btnActualizar*/
+    public JButton getBtnActualizar(){
+        return this.btnActualizar;
+    }//end method getBtnActualizar
+
+    /**GET Method Propertie btnGuardar*/
+    public JButton getBtnGuardar(){
+        return this.btnGuardar;
+    }//end method getBtnGuardar
+
+    /**GET Method Propertie btnCancelar*/
+    public JButton getBtnCancelar(){
+        return this.btnCancelar;
+    }//end method getBtnCancelar
+
+   //End GetterSetterExtension Source Code
+    
 }

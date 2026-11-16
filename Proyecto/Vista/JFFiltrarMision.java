@@ -13,16 +13,22 @@ import java.util.ArrayList;
  */
 public class JFFiltrarMision extends JFrame
 {
-      private static final String TODOS = "Todos";
+    public static final String TODOS = "Todos";
  
     private SistemaKsar sistema;
     private JComboBox<String> cmbEquipo;
     private JComboBox<String> cmbMunicipio;
     private DefaultTableModel modelo;
     private JLabel lblResumen;
+    
+    //Botones 
+    private JButton btnFiltrar;
+    private JButton btnLimpiar;
+    private JButton btnCerrar;
+    
  
-    public JFFiltrarMision(SistemaKsar sistema) {
-        this.sistema = sistema;
+    public JFFiltrarMision( ) {
+        
         setTitle("Filtrar misiones");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(820, 480);
@@ -31,7 +37,7 @@ public class JFFiltrarMision extends JFrame
         add(crearNorte(), BorderLayout.NORTH);
         add(crearCentro(), BorderLayout.CENTER);
         add(crearSur(), BorderLayout.SOUTH);
-        filtrar();
+        
     }
  
     private JPanel crearNorte() {
@@ -68,26 +74,20 @@ public class JFFiltrarMision extends JFrame
         filtros.setBorder(BorderFactory.createTitledBorder("Filtros"));
  
         cmbEquipo = new JComboBox<>();
-        cmbEquipo.addItem(TODOS);
-        for (Equipo e : sistema.getEquipos()) {
-            cmbEquipo.addItem(e.getNombre());
-        }
- 
+        
+        
         cmbMunicipio = new JComboBox<>();
         cmbMunicipio.addItem(TODOS);
-        for (String m : sistema.listarNombresMunicipios()) {
-            cmbMunicipio.addItem(m);
-        }
- 
+       
         JButton btnFiltrar = new JButton("Filtrar");
         btnFiltrar.setBackground(new Color(15, 32, 68));
         btnFiltrar.setForeground(Color.WHITE);
         btnFiltrar.setFocusPainted(false);
-        btnFiltrar.addActionListener(e -> filtrar());
+       
  
         JButton btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setFocusPainted(false);
-        btnLimpiar.addActionListener(e -> limpiar());
+       
  
         filtros.add(Estilo.etiqueta("Equipo:"));
         filtros.add(cmbEquipo);
@@ -126,29 +126,7 @@ public class JFFiltrarMision extends JFrame
         return sur;
     }
  
-    private void filtrar() {
-        String equipo = (String) cmbEquipo.getSelectedItem();
-        String municipio = (String) cmbMunicipio.getSelectedItem();
-        if (equipo == null || equipo.equals(TODOS)) equipo = "";
-        if (municipio == null || municipio.equals(TODOS)) municipio = "";
- 
-        ArrayList<Mision> lista = sistema.filtrarMisiones(equipo, municipio);
-        llenar(lista);
- 
-        if (lista.isEmpty()) {
-            lblResumen.setText("No hay misiones que cumplan los filtros.");
-        } else {
-            lblResumen.setText(lista.size() + " misión(es) encontrada(s).");
-        }
-    }
- 
-    private void limpiar() {
-        cmbEquipo.setSelectedIndex(0);
-        cmbMunicipio.setSelectedIndex(0);
-        filtrar();
-    }
- 
-    private void llenar(ArrayList<Mision> lista) {
+     public void mostrarMisiones(ArrayList<Mision> lista) {
         modelo.setRowCount(0);
         for (Mision m : lista) {
             Municipio mun = m.obtenerMunicipio();
@@ -166,5 +144,39 @@ public class JFFiltrarMision extends JFrame
                 m.getFallecidos()
             });
         }
-    }
+   }
+   
+   //Start GetterSetterExtension Source Code
+
+    /**GET Method Propertie cmbEquipo*/
+    public JComboBox<String> getCmbEquipo(){
+        return this.cmbEquipo;
+    }//end method getCmbEquipo
+
+    /**GET Method Propertie cmbMunicipio*/
+    public JComboBox<String> getCmbMunicipio(){
+        return this.cmbMunicipio;
+    }//end method getCmbMunicipio
+
+    /**GET Method Propertie lblResumen*/
+    public JLabel getLblResumen(){
+        return this.lblResumen;
+    }//end method getLblResumen
+
+    /**GET Method Propertie btnFiltrar*/
+    public JButton getBtnFiltrar(){
+        return this.btnFiltrar;
+    }//end method getBtnFiltrar
+
+    /**GET Method Propertie btnLimpiar*/
+    public JButton getBtnLimpiar(){
+        return this.btnLimpiar;
+    }//end method getBtnLimpiar
+
+    /**GET Method Propertie btnCerrar*/
+    public JButton getBtnCerrar(){
+        return this.btnCerrar;
+    }//end method getBtnCerrar
+
+   //End GetterSetterExtension Source Code
 }
