@@ -118,7 +118,8 @@ public class Mision
 
     
 //End GetterSetterExtension Source Code
-    // METODOS OPERACIONALES (Andrés)
+    
+// METODOS OPERACIONALES (Andrés)
 
     
     public int calcularDesempeno(){
